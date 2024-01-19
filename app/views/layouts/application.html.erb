@@ -13,9 +13,17 @@
   </head>
 
   <body style="<%= polaris_body_styles %>">
-    <main class="container mx-auto mt-28 px-5 flex">
+    <main class="mx-auto">
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
+
+      <% if content_for?(:heading_text) %>
+        <div class="container mx-auto my-5">
+          <%= polaris_text(variant: :heading4xl, as: :h1) do %>
+            <%= yield :heading_text %>
+          <% end %>
+        </div>
+      <% end %>
       
       <%= yield %>
     </main>
