@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html style="<%= polaris_html_styles %>">
   <head>
     <title>Luca</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -9,9 +9,10 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= stylesheet_link_tag "polaris_view_components" %>
   </head>
 
-  <body>
+  <body style="<%= polaris_body_styles %>">
     <main class="container mx-auto mt-28 px-5 flex">
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
