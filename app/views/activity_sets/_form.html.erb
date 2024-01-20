@@ -1,0 +1,47 @@
+<%= form_with(model: activity_set, class: "contents") do |form| %>
+  <% if activity_set.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(activity_set.errors.count, "error") %> prohibited this activity_set from being saved:</h2>
+
+      <ul>
+        <% activity_set.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :load_goal %>
+    <%= form.text_field :load_goal, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :load_actual %>
+    <%= form.text_field :load_actual, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :repetitions_goal %>
+    <%= form.text_field :repetitions_goal, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :repetitions_actual %>
+    <%= form.text_field :repetitions_actual, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :repetitions_type %>
+    <%= form.text_field :repetitions_type, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :warmup %>
+    <%= form.check_box :warmup, class: "block mt-2 h-5 w-5" %>
+  </div>
+
+  <div class="inline">
+    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>

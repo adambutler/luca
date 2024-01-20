@@ -1,0 +1,37 @@
+<div id="<%= dom_id activity_set %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Load goal:</strong>
+    <%= activity_set.load_goal %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Load actual:</strong>
+    <%= activity_set.load_actual %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Repetitions goal:</strong>
+    <%= activity_set.repetitions_goal %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Repetitions actual:</strong>
+    <%= activity_set.repetitions_actual %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Repetitions type:</strong>
+    <%= activity_set.repetitions_type %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Warmup:</strong>
+    <%= activity_set.warmup %>
+  </p>
+
+  <% if action_name != "show" %>
+    <%= link_to "Show this activity set", activity_set, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to "Edit this activity set", edit_activity_set_path(activity_set), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>

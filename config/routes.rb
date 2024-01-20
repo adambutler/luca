@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :workouts
+  resources :workouts do
+    resources :activities, shallow: true do
+      resources :activity_sets, as: "set", path: "sets", shallow: true
+    end
+  end
+  
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

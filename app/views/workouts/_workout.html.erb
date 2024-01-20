@@ -1,13 +1,20 @@
 <div id="<%= dom_id workout %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">User:</strong>
-    <%= workout.user_id %>
-  </p>
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Starts at:</strong>
-    <%= workout.scheduled_at %>
-  </p>
+<div class="container mx-auto my-5">
+  <div class="mb-5">
+    <%= polaris_text(variant: :heading2xl, as: :h2) { "Activities" } %>
+  </div>
+
+  <div class="mb-5">
+    <% workout.activities.each do |activity| %>
+      <%= render "activities/card", activity: activity %>
+    <% end %>
+  </div>
+
+  <%= link_to new_workout_activity_path(workout) do %>
+    <%= polaris_button(full_width: true) { "Add Activity" } %>
+  <% end %>
+</div>
 
   <% if action_name != "show" %>
     <%= link_to "Show this workout", workout, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
