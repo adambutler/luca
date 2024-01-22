@@ -22,17 +22,17 @@
           <%= row.load_goal %>
         <% end %>
         <% table.with_column("Actual") do |row| %>
-          <%= row.load_actual || "-" %>
+          <%= form_with(model: row, class: "contents", url: set_path) do |form| %>
+            <%= form.number_field :load_actual, value: row.load_actual&.prettify, class: "w-24", onchange: "this.form.requestSubmit()" %>
+          <% end %>
         <% end %>
         <% table.with_column("Rep Goal") do |row| %>
           <%= row.repetitions_type == "limit" ? "@" : nil %>
           <%= [row.repetitions_goal.min, row.repetitions_goal.max].uniq.join("-") %>
         <% end %>
         <% table.with_column("Actual") do |row| %>
-          <% if row.repetitions_actual %>
-            <%= row.repetitions_actual.min %> - <%= row.repetitions_actual.max %>
-          <% else %>
-            -
+          <%= form_with(model: row, class: "contents", url: set_path) do |form| %>
+            <%= form.text_field :repetitions_actual, value: row.repetitions_actual, class: "w-24", onchange: "this.form.requestSubmit()" %>
           <% end %>
         <% end %>
       <% end %>

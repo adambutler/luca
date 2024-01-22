@@ -24,7 +24,7 @@ class ActivitySetsController < ApplicationController
     @activity_set = ActivitySet.new(activity_set_params)
 
     if @activity_set.save
-      redirect_to @activity_set, notice: "Activity set was successfully created."
+      redirect_to workout_path(@activity_set.activity.workout), notice: "Activity set was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -33,7 +33,7 @@ class ActivitySetsController < ApplicationController
   # PATCH/PUT /activity_sets/1
   def update
     if @activity_set.update(activity_set_params)
-      redirect_to @activity_set, notice: "Activity set was successfully updated.", status: :see_other
+      redirect_to workout_path(@activity_set.activity.workout), notice: "Activity set was successfully updated.", status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
