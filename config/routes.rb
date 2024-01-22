@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   resources :workouts do
     resources :activities, shallow: true do
-      resources :activity_sets, as: "set", path: "sets", shallow: true
+      resources :activity_sets, as: "set", path: "sets", shallow: true do
+        put :toggle_warmup, on: :member
+      end
     end
   end
   

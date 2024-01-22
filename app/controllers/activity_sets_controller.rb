@@ -1,5 +1,5 @@
 class ActivitySetsController < ApplicationController
-  before_action :set_activity_set, only: %i[ show edit update destroy ]
+  before_action :set_activity_set, only: %i[show edit update destroy toggle_warmup]
 
   # GET /activity_sets
   def index
@@ -45,6 +45,16 @@ class ActivitySetsController < ApplicationController
     workout = @activity_set.activity.workout
     @activity_set.destroy!
     redirect_to workout_path(workout), notice: "Activity set was successfully destroyed.", status: :see_other
+  end
+
+  def toggle_warmup
+    if @activity_set.warmup?
+      @activity_set.update(warmup: false)
+    elsif @activity_set.set_number == 1
+      @activity_set.update(warmup: true)
+    end
+
+    redirect_to workout_path(@activity_set.activity.workout), notice: "Activity set was successfully updated.", status: :see_other
   end
 
   private

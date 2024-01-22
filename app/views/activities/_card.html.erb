@@ -12,10 +12,12 @@
       <p class="text-xs text-gray-700"><%= activity.exercise.description %></p>
       <%= polaris_data_table(activity.sets) do |table| %>
         <% table.with_column("") do |row| %>
-          <% if row.warmup %>
-            <%= polaris_badge(status: :attention) { "W" } %>
-          <% else %>
-            <%= polaris_badge(status: :success) { row.set_number.to_s } %>
+          <%= link_to toggle_warmup_set_path(row), data: {"turbo-method": "put"} do %>
+            <% if row.warmup %>
+              <%= polaris_badge(status: :attention) { "W" } %>
+            <% else %>
+              <%= polaris_badge(status: :success) { row.set_number.to_s } %>
+            <% end %>
           <% end %>
         <% end %>
         <% table.with_column("Load Goal") do |row| %>
