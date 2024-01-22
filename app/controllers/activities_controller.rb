@@ -24,6 +24,7 @@ class ActivitiesController < ApplicationController
   def create
     @activity = Activity.new(activity_params)
     @activity.workout = @workout
+    @activity.exercise = Exercise.find_by_title(params[:activity][:exercise_title])
 
     if @activity.save
       redirect_to @workout, notice: "Activity was successfully created."

@@ -12,8 +12,15 @@
   <% end %>
 
   <div class="my-5">
-    <%= form.label :exercise_id %>
-    <%= form.select :exercise_id, Exercise.all.collect { |e| [e.title, e.id]}, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.label :exercise_title %>
+    <%= form.text_field :exercise_title, list: "exercises", class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+
+    <datalist id="exercises">
+      <% Exercise.all.each do |exercise| %>
+        <option value="<%= exercise.title %>">
+      <% end %>
+    </datalist>
+</datalist>
   </div>
 
   <div class="inline">
