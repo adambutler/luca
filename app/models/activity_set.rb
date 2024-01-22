@@ -18,7 +18,14 @@ class ActivitySet < ApplicationRecord
     when Range
       super(value)
     when String
-      super(Range.new(*value.split(/\.{2,3}|\-/).map(&:to_i)))
+      if value.match?(/\@\d?$/)
+        int = value.match(/\@(\d)?$/)[1]
+        self.repetitions_type = "limit"
+        super(int..int)
+      else
+        self.repetitions_type = "range"
+        super(Range.new(*value.split(/\.{2,3}|\-/).map(&:to_i)))
+      end
     else
       raise ArgumentError, "Invalid value for repetitions_goal: #{value.inspect}"
     end
