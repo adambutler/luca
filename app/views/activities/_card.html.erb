@@ -1,57 +1,64 @@
-<%= polaris_callout_card do |callout| %>
-  <%= polaris_stack(vertical: true) do |stack| %>
-    <% stack.with_item do %>
-      <div class="flex">
-        <div class="flex-shink mr-1">
-          <%= polaris_icon do %>
-            <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><title>ionicons-v5-q</title><line x1="48" y1="256" x2="464" y2="256" style="fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/><rect x="384" y="128" width="32" height="256" rx="16" ry="16" style="fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/><rect x="96" y="128" width="32" height="256" rx="16" ry="16" style="fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/><rect x="32" y="192" width="16" height="128" rx="8" ry="8" style="fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/><rect x="464" y="192" width="16" height="128" rx="8" ry="8" style="fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/></svg>
-          <% end %>
-        </div>
-        <p class="mb-2 font-bold"><%= activity.exercise.title %></p>
-      </div>
-      <p class="text-xs text-gray-700"><%= activity.exercise.description %></p>
-      <%= polaris_data_table(activity.sets) do |table| %>
-        <% table.with_column("") do |row| %>
-          <%= link_to toggle_warmup_set_path(row), data: {"turbo-method": "put"} do %>
-            <% if row.warmup %>
-              <%= polaris_badge(status: :attention) { "W" } %>
-            <% else %>
-              <%= polaris_badge(status: :success) { row.set_number.to_s } %>
+<%= turbo_frame_tag activity, :card, class: "block mb-5" do %>
+  <%= polaris_callout_card do |callout| %>
+    <%= polaris_stack(vertical: true) do |stack| %>
+      <% stack.with_item do %>
+        <%= link_to activiy_card_collapsable_link(activity) do %>
+          <div class="flex">
+            <div class="flex-shink mr-1">
+              <%= polaris_icon do %>
+                <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><title>ionicons-v5-q</title><line x1="48" y1="256" x2="464" y2="256" style="fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/><rect x="384" y="128" width="32" height="256" rx="16" ry="16" style="fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/><rect x="96" y="128" width="32" height="256" rx="16" ry="16" style="fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/><rect x="32" y="192" width="16" height="128" rx="8" ry="8" style="fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/><rect x="464" y="192" width="16" height="128" rx="8" ry="8" style="fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/></svg>
+              <% end %>
+            </div>
+            <p class="mb-2 font-bold"><%= activity.exercise.title %></p>
+          </div>
+          <p class="text-xs text-gray-700"><%= activity.exercise.description %></p>
+        <% end %>
+
+        <% if params[:activity] == activity.id.to_s %>
+          <%= polaris_data_table(activity.sets) do |table| %>
+            <% table.with_column("") do |row| %>
+              <%= link_to toggle_warmup_set_path(row), data: {"turbo-method": "put"} do %>
+                <% if row.warmup %>
+                  <%= polaris_badge(status: :attention) { "W" } %>
+                <% else %>
+                  <%= polaris_badge(status: :success) { row.set_number.to_s } %>
+                <% end %>
+              <% end %>
+            <% end %>
+            <% table.with_column("Load Goal") do |row| %>
+              <%= form_with(model: row, class: "contents", url: set_path(row)) do |form| %>
+                <%= form.number_field :load_goal, value: row.load_goal&.prettify, step: "0.1", class: "w-24", onchange: "this.form.requestSubmit()" %>
+              <% end %>
+            <% end %>
+            <% table.with_column("Actual") do |row| %>
+              <%= form_with(model: row, class: "contents", url: set_path(row)) do |form| %>
+                <%= form.number_field :load_actual, value: row.load_actual&.prettify, step: "0.1", class: "w-24", onchange: "this.form.requestSubmit()" %>
+              <% end %>
+            <% end %>
+            <% table.with_column("Rep Goal") do |row| %>
+              <%= form_with(model: row, class: "contents", url: set_path(row)) do |form| %>
+                <%= form.text_field :repetitions_goal, value: repetitions_goal_value(row), class: "w-24", onchange: "this.form.requestSubmit()" %>
+              <% end %>
+            <% end %>
+            <% table.with_column("Actual") do |row| %>
+              <%= form_with(model: row, class: "contents", url: set_path(row)) do |form| %>
+                <%= form.number_field :repetitions_actual, value: row.repetitions_actual, class: "w-24", onchange: "this.form.requestSubmit()" %>
+              <% end %>
+            <% end %>
+            <% table.with_column("") do |row| %>
+              <%= form_with(model: row, class: "contents", url: set_path(row), method: :delete) do |form| %>
+                <%= polaris_button(submit: true) { "Delete" } %>
+              <% end %>
             <% end %>
           <% end %>
-        <% end %>
-        <% table.with_column("Load Goal") do |row| %>
-          <%= form_with(model: row, class: "contents", url: set_path(row)) do |form| %>
-            <%= form.number_field :load_goal, value: row.load_goal&.prettify, class: "w-24", onchange: "this.form.requestSubmit()" %>
+          <%= form_with(model: activity.sets.build, url: activity_set_index_path(activity)) do |form| %>
+            <%= form.hidden_field :load_goal %>
+            <%= form.hidden_field :repetitions_goal %>
+            <%= form.hidden_field :warmup %>
+            <%= form.hidden_field :repetitions_type %>
+            <%= polaris_button(full_width: true, submit: true) { "Add Set" } %>
           <% end %>
         <% end %>
-        <% table.with_column("Actual") do |row| %>
-          <%= form_with(model: row, class: "contents", url: set_path(row)) do |form| %>
-            <%= form.number_field :load_actual, value: row.load_actual&.prettify, class: "w-24", onchange: "this.form.requestSubmit()" %>
-          <% end %>
-        <% end %>
-        <% table.with_column("Rep Goal") do |row| %>
-          <%= form_with(model: row, class: "contents", url: set_path(row)) do |form| %>
-            <%= form.text_field :repetitions_goal, value: repetitions_goal_value(row), class: "w-24", onchange: "this.form.requestSubmit()" %>
-          <% end %>
-        <% end %>
-        <% table.with_column("Actual") do |row| %>
-          <%= form_with(model: row, class: "contents", url: set_path(row)) do |form| %>
-            <%= form.number_field :repetitions_actual, value: row.repetitions_actual, class: "w-24", onchange: "this.form.requestSubmit()" %>
-          <% end %>
-        <% end %>
-        <% table.with_column("") do |row| %>
-          <%= form_with(model: row, class: "contents", url: set_path(row), method: :delete) do |form| %>
-            <%= polaris_button(submit: true) { "Delete" } %>
-          <% end %>
-        <% end %>
-      <% end %>
-      <%= form_with(model: activity.sets.build, url: activity_set_index_path(activity)) do |form| %>
-        <%= form.hidden_field :load_goal %>
-        <%= form.hidden_field :repetitions_goal %>
-        <%= form.hidden_field :warmup %>
-        <%= form.hidden_field :repetitions_type %>
-        <%= polaris_button(full_width: true, submit: true) { "Add Set" } %>
       <% end %>
     <% end %>
   <% end %>
