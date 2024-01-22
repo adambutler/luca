@@ -1,5 +1,7 @@
 class ActivitySet < ApplicationRecord
-  belongs_to :activity
+  belongs_to :activity, touch: true
+
+  default_scope { order(:id) }
   
   after_initialize :setup_default_values
 

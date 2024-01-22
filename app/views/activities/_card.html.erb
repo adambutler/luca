@@ -19,10 +19,10 @@
           <% end %>
         <% end %>
         <% table.with_column("Load Goal") do |row| %>
-          <%= row.load_goal %>
+          <%= row.load_goal&.prettify %>
         <% end %>
         <% table.with_column("Actual") do |row| %>
-          <%= form_with(model: row, class: "contents", url: set_path) do |form| %>
+          <%= form_with(model: row, class: "contents", url: set_path(row)) do |form| %>
             <%= form.number_field :load_actual, value: row.load_actual&.prettify, class: "w-24", onchange: "this.form.requestSubmit()" %>
           <% end %>
         <% end %>
@@ -31,7 +31,7 @@
           <%= [row.repetitions_goal.min, row.repetitions_goal.max].uniq.join("-") %>
         <% end %>
         <% table.with_column("Actual") do |row| %>
-          <%= form_with(model: row, class: "contents", url: set_path) do |form| %>
+          <%= form_with(model: row, class: "contents", url: set_path(row)) do |form| %>
             <%= form.text_field :repetitions_actual, value: row.repetitions_actual, class: "w-24", onchange: "this.form.requestSubmit()" %>
           <% end %>
         <% end %>
