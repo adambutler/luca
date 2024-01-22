@@ -21,7 +21,9 @@
           <% end %>
         <% end %>
         <% table.with_column("Load Goal") do |row| %>
-          <%= row.load_goal&.prettify %>
+          <%= form_with(model: row, class: "contents", url: set_path(row)) do |form| %>
+            <%= form.number_field :load_goal, value: row.load_goal&.prettify, class: "w-24", onchange: "this.form.requestSubmit()" %>
+          <% end %>
         <% end %>
         <% table.with_column("Actual") do |row| %>
           <%= form_with(model: row, class: "contents", url: set_path(row)) do |form| %>
@@ -29,12 +31,13 @@
           <% end %>
         <% end %>
         <% table.with_column("Rep Goal") do |row| %>
-          <%= row.repetitions_type == "limit" ? "@" : nil %>
-          <%= [row.repetitions_goal.min, row.repetitions_goal.max].uniq.join("-") %>
+          <%= form_with(model: row, class: "contents", url: set_path(row)) do |form| %>
+            <%= form.text_field :repetitions_goal, value: repetitions_goal_value(row), class: "w-24", onchange: "this.form.requestSubmit()" %>
+          <% end %>
         <% end %>
         <% table.with_column("Actual") do |row| %>
           <%= form_with(model: row, class: "contents", url: set_path(row)) do |form| %>
-            <%= form.text_field :repetitions_actual, value: row.repetitions_actual, class: "w-24", onchange: "this.form.requestSubmit()" %>
+            <%= form.number_field :repetitions_actual, value: row.repetitions_actual, class: "w-24", onchange: "this.form.requestSubmit()" %>
           <% end %>
         <% end %>
         <% table.with_column("") do |row| %>

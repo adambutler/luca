@@ -18,7 +18,7 @@ class ActivitySet < ApplicationRecord
     when Range
       super(value)
     when String
-      super(Range.new(*value.split(/\.{2,3}/).map(&:to_i)))
+      super(Range.new(*value.split(/\.{2,3}|\-/).map(&:to_i)))
     else
       raise ArgumentError, "Invalid value for repetitions_goal: #{value.inspect}"
     end
