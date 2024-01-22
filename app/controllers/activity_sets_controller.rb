@@ -22,8 +22,9 @@ class ActivitySetsController < ApplicationController
   # POST /activity_sets
   def create
     @activity_set = ActivitySet.new(activity_set_params)
-
-    if @activity_set.save
+    @activity_set.activity_id = params[:activity_id]
+    
+    if @activity_set.save!
       redirect_to workout_path(@activity_set.activity.workout), notice: "Activity set was successfully created."
     else
       render :new, status: :unprocessable_entity
@@ -41,8 +42,9 @@ class ActivitySetsController < ApplicationController
 
   # DELETE /activity_sets/1
   def destroy
+    workout = @activity_set.activity.workout
     @activity_set.destroy!
-    redirect_to activity_sets_url, notice: "Activity set was successfully destroyed.", status: :see_other
+    redirect_to workout_path(workout), notice: "Activity set was successfully destroyed.", status: :see_other
   end
 
   private

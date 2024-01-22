@@ -35,6 +35,18 @@
             <%= form.text_field :repetitions_actual, value: row.repetitions_actual, class: "w-24", onchange: "this.form.requestSubmit()" %>
           <% end %>
         <% end %>
+        <% table.with_column("") do |row| %>
+          <%= form_with(model: row, class: "contents", url: set_path(row), method: :delete) do |form| %>
+            <%= polaris_button(submit: true) { "Delete" } %>
+          <% end %>
+        <% end %>
+      <% end %>
+      <%= form_with(model: activity.sets.build, url: activity_set_index_path(activity)) do |form| %>
+        <%= form.hidden_field :load_goal %>
+        <%= form.hidden_field :repetitions_goal %>
+        <%= form.hidden_field :warmup %>
+        <%= form.hidden_field :repetitions_type %>
+        <%= polaris_button(full_width: true, submit: true) { "Add Set" } %>
       <% end %>
     <% end %>
   <% end %>
