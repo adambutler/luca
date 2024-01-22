@@ -25,6 +25,7 @@ env:
     DB_HOST: 49.13.119.206
   secret:
     - RAILS_MASTER_KEY
+    - POSTGRES_PASSWORD
 
 # Use a different ssh user than root
 # ssh:
@@ -53,7 +54,6 @@ accessories:
       secret:
         - POSTGRES_PASSWORD
     files:
-      - config/mysql/production.cnf:/etc/mysql/my.cnf
       - db/production.sql:/docker-entrypoint-initdb.d/setup.sql
     directories:
       - data:/var/lib/mysql
