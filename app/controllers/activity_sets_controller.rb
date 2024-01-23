@@ -25,7 +25,7 @@ class ActivitySetsController < ApplicationController
     @activity_set.activity_id = params[:activity_id]
     
     if @activity_set.save!
-      redirect_to workout_path(@activity_set.activity.workout), notice: "Activity set was successfully created."
+      redirect_to workout_path(@activity_set.activity.workout, activity: @activity_set.activity.id), notice: "Activity set was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -44,7 +44,7 @@ class ActivitySetsController < ApplicationController
   def destroy
     workout = @activity_set.activity.workout
     @activity_set.destroy!
-    redirect_to workout_path(workout), notice: "Activity set was successfully destroyed.", status: :see_other
+    redirect_to workout_path(workout, activity: @activity_set.activity.id), notice: "Activity set was successfully destroyed.", status: :see_other
   end
 
   def toggle_warmup
