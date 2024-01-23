@@ -15,42 +15,64 @@
         <% end %>
 
         <% if params[:activity] == activity.id.to_s %>
-          <%= polaris_data_table(activity.sets) do |table| %>
-            <% table.with_column("") do |row| %>
-              <%= link_to toggle_warmup_set_path(row), data: {"turbo-method": "put"} do %>
-                <% if row.warmup %>
-                  <%= polaris_badge(status: :attention) { "W" } %>
-                <% else %>
-                  <%= polaris_badge(status: :success) { row.set_number.to_s } %>
-                <% end %>
+          <table class="table-auto text-sm my-5">
+            <thead class="text-xs uppercase">
+              <tr>
+                <th></th>
+                <th colspan="2">Load</th>
+                <th colspan="2">Rep</th>
+                <th></th>
+              </tr>
+              <tr>
+                <th></th>
+                <th>Goal</th>
+                <th>Actual</th>
+                <th>Goal</th>
+                <th>Actual</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% activity.sets.each do |set| %>
+                <tr>
+                  <td class="text-center p-1">
+                    <%= link_to toggle_warmup_set_path(set), data: {"turbo-method": "put"} do %>
+                      <% if set.warmup %>
+                        <%= polaris_badge(status: :attention) { "W" } %>
+                      <% else %>
+                        <%= polaris_badge(status: :success) { set.set_number.to_s } %>
+                      <% end %>
+                    <% end %>
+                  </td>
+                  <td class="p-1">
+                    <%= form_with(model: set, class: "contents", url: set_path(set)) do |form| %>
+                      <%= form.number_field :load_goal, value: set.load_goal&.prettify, step: "0.1", class: "w-16 px-2 py-2 border-none rounded bg-gray-100 text-xs", onchange: "this.form.requestSubmit()" %>
+                    <% end %>
+                  </td>
+                  <td class="p-1">
+                    <%= form_with(model: set, class: "contents", url: set_path(set)) do |form| %>
+                      <%= form.number_field :load_actual, value: set.load_actual&.prettify, step: "0.1", class: "w-16 px-2 py-2 border-none rounded bg-gray-100 text-xs", onchange: "this.form.requestSubmit()" %>
+                    <% end %>
+                  </td>
+                  <td class="p-1">
+                    <%= form_with(model: set, class: "contents", url: set_path(set)) do |form| %>
+                      <%= form.text_field :repetitions_goal, value: repetitions_goal_value(set), class: "w-16 px-2 py-2 border-none rounded bg-gray-100 text-xs", onchange: "this.form.requestSubmit()" %>
+                    <% end %>
+                  </td>
+                  <td class="p-1">
+                    <%= form_with(model: set, class: "contents", url: set_path(set)) do |form| %>
+                      <%= form.number_field :repetitions_actual, value: set.repetitions_actual, class: "w-16 px-2 py-2 border-none rounded bg-gray-100 text-xs", onchange: "this.form.requestSubmit()" %>
+                    <% end %>
+                  </td>
+                  <td>
+                    <%= form_with(model: set, class: "contents", url: set_path(set), method: :delete) do |form| %>
+                      <%= polaris_icon(name: "DeleteMinor") %>
+                    <% end %>
+                  </td>
+                </tr>
               <% end %>
-            <% end %>
-            <% table.with_column("Load Goal") do |row| %>
-              <%= form_with(model: row, class: "contents", url: set_path(row)) do |form| %>
-                <%= form.number_field :load_goal, value: row.load_goal&.prettify, step: "0.1", class: "w-24", onchange: "this.form.requestSubmit()" %>
-              <% end %>
-            <% end %>
-            <% table.with_column("Actual") do |row| %>
-              <%= form_with(model: row, class: "contents", url: set_path(row)) do |form| %>
-                <%= form.number_field :load_actual, value: row.load_actual&.prettify, step: "0.1", class: "w-24", onchange: "this.form.requestSubmit()" %>
-              <% end %>
-            <% end %>
-            <% table.with_column("Rep Goal") do |row| %>
-              <%= form_with(model: row, class: "contents", url: set_path(row)) do |form| %>
-                <%= form.text_field :repetitions_goal, value: repetitions_goal_value(row), class: "w-24", onchange: "this.form.requestSubmit()" %>
-              <% end %>
-            <% end %>
-            <% table.with_column("Actual") do |row| %>
-              <%= form_with(model: row, class: "contents", url: set_path(row)) do |form| %>
-                <%= form.number_field :repetitions_actual, value: row.repetitions_actual, class: "w-24", onchange: "this.form.requestSubmit()" %>
-              <% end %>
-            <% end %>
-            <% table.with_column("") do |row| %>
-              <%= form_with(model: row, class: "contents", url: set_path(row), method: :delete) do |form| %>
-                <%= polaris_button(submit: true) { "Delete" } %>
-              <% end %>
-            <% end %>
-          <% end %>
+            </tbody>
+          </table>
           <%= form_with(model: activity.sets.build, url: activity_set_index_path(activity)) do |form| %>
             <%= form.hidden_field :load_goal %>
             <%= form.hidden_field :repetitions_goal %>
