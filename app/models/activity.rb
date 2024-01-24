@@ -4,4 +4,8 @@ class Activity < ApplicationRecord
   has_many :sets, dependent: :destroy, class_name: "ActivitySet"
 
   default_scope { order(:created_at) }
+
+  def has_warmup?
+    sets.warmup.any?
+  end
 end

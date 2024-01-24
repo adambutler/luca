@@ -2,6 +2,7 @@ class ActivitySet < ApplicationRecord
   belongs_to :activity, touch: true
 
   default_scope { order(:created_at) }
+  scope :warmup, -> { where(warmup: true) }
   
   after_initialize :setup_default_values
 
@@ -23,8 +24,16 @@ class ActivitySet < ApplicationRecord
         self.repetitions_type = "limit"
         super(int..int)
       else
-        self.repetitions_type = "range"
-        super(Range.new(*value.split(/\.{2,3}|\-/).map(&:to_i)))
+        match = value.match(/^(\d+)(\.{2,3}|-)(\d+)$/)
+        if match
+          self.repetitions_type = "range"
+          from = match[1].to_i
+          range_operator = match[2]
+          to = range_operator === "..." ? match[3].to_i - 1 : match[3].to_i
+          super(from..to)
+        else
+          raise ArgumentError, "Invalid value for repetitions_goal: #{value.inspect}"
+        end
       end
     else
       raise ArgumentError, "Invalid value for repetitions_goal: #{value.inspect}"

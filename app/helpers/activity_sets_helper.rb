@@ -5,4 +5,12 @@ module ActivitySetsHelper
 
     a.compact.join
   end
+
+  def repetitions_actual_copy_value(set)
+    set.repetitions_goal.max
+  end
+
+  def can_copy_repetitions_actual_copy_value?(set)
+    set.repetitions_type == "range"
+  end
 end

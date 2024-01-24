@@ -50,11 +50,11 @@ class ActivitySetsController < ApplicationController
   def toggle_warmup
     if @activity_set.warmup?
       @activity_set.update(warmup: false)
-    elsif @activity_set.set_number == 1
+    elsif @activity_set.set_number == 1 && !@activity_set.activity.has_warmup?
       @activity_set.update(warmup: true)
     end
 
-    redirect_to workout_path(@activity_set.activity.workout), notice: "Activity set was successfully updated.", status: :see_other
+    redirect_to workout_path(@activity_set.activity.workout, activity: @activity_set.activity.id), notice: "Activity set was successfully updated.", status: :see_other
   end
 
   private
