@@ -11,7 +11,7 @@
             </div>
             <p class="mb-2 font-bold"><%= activity.exercise.title %></p>
           </div>
-          <p class="text-xs text-gray-700 mb-5"><%= activity.exercise.description %></p>
+          <p class="text-xs text-gray-700"><%= activity.exercise.description.truncate(params[:activity] == activity.id.to_s ? Float::INFINITY : 150) %></p>
         <% end %>
 
         <% if params[:activity] == activity.id.to_s %>
