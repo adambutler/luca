@@ -15,7 +15,7 @@
         <% end %>
 
         <% if params[:activity] == activity.id.to_s %>
-          <div class="grid grid-cols-12 gap-1 text-center mb-5 text-xs">
+          <div class="grid grid-cols-12 gap-1 text-center mt-5 text-xs">
             <div class=""></div>
             <div class="col-span-5 font-black uppercase text-emerald-700">Load</div>
             <div class="col-span-5 font-black uppercase text-sky-700">Rep</div>
@@ -85,14 +85,14 @@
               </div>
             <% end %>
           </div>
-        <% end %>
-          
-        <%= form_with(model: activity.sets.build, url: activity_set_index_path(activity)) do |form| %>
-          <%= form.hidden_field :load_goal %>
-          <%= form.hidden_field :repetitions_goal %>
-          <%= form.hidden_field :warmup %>
-          <%= form.hidden_field :repetitions_type %>
-          <%= polaris_button(full_width: true, submit: true) { "Add Set" } %>
+        
+          <%= form_with(model: activity.sets.build, url: activity_set_index_path(activity), class: "mt-5") do |form| %>
+            <%= form.hidden_field :load_goal %>
+            <%= form.hidden_field :repetitions_goal %>
+            <%= form.hidden_field :warmup %>
+            <%= form.hidden_field :repetitions_type %>
+            <%= polaris_button(full_width: true, submit: true, primary: true) { "Add Set" } %>
+          <% end %>
         <% end %>
       <% end %>
     <% end %>
