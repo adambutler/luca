@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :users, only: [:show]
+  
   resources :workouts do
     resources :activities, shallow: true do
       resources :activity_sets, as: "set", path: "sets", shallow: true do

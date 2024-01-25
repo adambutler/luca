@@ -1,10 +1,4 @@
-<% content_for(:heading_text) { greet } %>
-
-<% if @clients.any? %>
-  <% @clients.each do |client| %>
-    <%= render "users/profile_card", user: client %>
-  <% end %>
-<% end %>
+<% content_for(:heading_text) { @user.full_name } %>
 
 <div class="relative w-full flex gap-6 snap-x overflow-x-auto py-5">
   <% @workouts.each do |workout| %>
@@ -14,7 +8,7 @@
   <% end %>
 </div>
 
-<%= link_to new_workout_path do %>
+<%= link_to new_workout_path(user: @user) do %>
   <%= polaris_button(full_width: true) { "Add Workout" } %>
 <% end %>
 

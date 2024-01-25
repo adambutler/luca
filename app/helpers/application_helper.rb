@@ -8,4 +8,10 @@ module ApplicationHelper
       "Welcome"
     end
   end
+
+  def gravitar_url(user, size: 256)
+    email = user.email.downcase.strip
+    hash = Digest::SHA2.hexdigest(email)
+    "https://gravatar.com/avatar/#{hash}?s=#{size}"
+  end
 end

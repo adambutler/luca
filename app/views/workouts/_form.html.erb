@@ -11,6 +11,10 @@
     </div>
   <% end %>
 
+  <% if params[:user] %>
+    <%= form.text_field :user_id, value: params[:user] %>
+  <% end %>
+
   <div class="my-5">
     <%= form.label :scheduled_at %>
     <%= form.datetime_field :scheduled_at, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>

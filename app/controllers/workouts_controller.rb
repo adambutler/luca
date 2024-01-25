@@ -22,7 +22,7 @@ class WorkoutsController < ApplicationController
   # POST /workouts
   def create
     @workout = Workout.new(workout_params)
-    @workout.user = current_user
+    @workout.user ||= current_user
 
     if @workout.save
       redirect_to @workout, notice: "Workout was successfully created."
