@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_19_132821) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_25_080846) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -34,6 +34,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_19_132821) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["activity_id"], name: "index_activity_sets_on_activity_id"
+  end
+
+  create_table "client_memberships", force: :cascade do |t|
+    t.bigint "client_id", null: false
+    t.bigint "trainer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_client_memberships_on_client_id"
+    t.index ["trainer_id"], name: "index_client_memberships_on_trainer_id"
   end
 
   create_table "exercises", force: :cascade do |t|
@@ -77,5 +86,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_19_132821) do
   add_foreign_key "activities", "exercises"
   add_foreign_key "activities", "workouts"
   add_foreign_key "activity_sets", "activities"
+  add_foreign_key "client_memberships", "users", column: "client_id"
+  add_foreign_key "client_memberships", "users", column: "trainer_id"
   add_foreign_key "workouts", "users"
 end
