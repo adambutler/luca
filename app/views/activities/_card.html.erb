@@ -87,12 +87,12 @@
           </div>
         
           <%= form_with(model: activity.sets.build, url: activity_set_index_path(activity), class: "mt-5") do |form| %>
-            <%= form.text_field :load_goal %>
-            <%= form.text_field :load_actual %>
-            <%= form.text_field :repetitions_goal %>
-            <%= form.text_field :repetitions_actual %>
-            <%= form.text_field :warmup %>
-            <%= form.text_field :repetitions_type %>
+            <%= form.hidden_field :load_goal %>
+            <%= form.hidden_field :load_actual %>
+            <%= form.hidden_field :repetitions_goal %>
+            <%= form.hidden_field :repetitions_actual %>
+            <%= form.hidden_field :warmup %>
+            <%= form.hidden_field :repetitions_type %>
             <%= polaris_button(full_width: true, submit: true, primary: true) { "Add Set" } %>
           <% end %>
         <% end %>
