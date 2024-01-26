@@ -43,10 +43,13 @@ class ActivitySet < ApplicationRecord
   private
 
   def setup_default_values
+    return if persisted?
     return unless activity
 
     self.load_goal ||= sibilings.last&.load_goal || 20
+    self.load_actual ||= sibilings.last&.load_actual || 20
     self.repetitions_goal ||= (sibilings.last&.repetitions_goal || (8..10))
+    self.repetitions_actual ||= (sibilings.last&.repetitions_actual || (8..10))
     self.repetitions_type ||= (sibilings.last&.repetitions_type || "range")
     self.warmup ||= sibilings.empty?
   end
