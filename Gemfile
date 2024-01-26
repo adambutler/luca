@@ -53,6 +53,7 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mswin mswin64 mingw x64_mingw ]
   gem "rubocop-rails-omakase", require: false
   gem "awesome_print", require: false
+  gem "pry"
 end
 
 group :development do
