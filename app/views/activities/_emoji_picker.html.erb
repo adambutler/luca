@@ -4,7 +4,7 @@
       <% Activity.emojis.keys.each do |emoji_key| %>
         <%= form_with(model: activity, url: activity_path(activity), class: "inline-block") do |form| %>
           <%= form.hidden_field :emoji, value: emoji_key %>
-          <%= form.submit emoji_key_to_emoji(emoji_key), class: "p-2" %>
+          <%= form.submit emoji_key_to_emoji(emoji_key), class: "p-2 cursor-pointer" %>
         <% end %>
       <% end %>
     </div>
