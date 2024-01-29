@@ -16,7 +16,7 @@
         </div>
 
         <% if params[:activity] == activity.id.to_s %>
-          <%= link_to activity_path(activity), data: {"turbo-method": :delete, "turbo-frame": "_top"}, class: "p-5 absolute top-0 right-0" do |form| %>
+          <%= link_to activity_path(activity), data: {"turbo-method": :delete, "turbo-frame": "_top", "turbo-confirm": "Are you sure you want to delete this activity?"}, class: "p-5 absolute top-0 right-0" do |form| %>
             <%= polaris_icon(name: "DeleteMinor", color: :critical) %>
           <% end %>
 
