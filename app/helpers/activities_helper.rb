@@ -6,4 +6,8 @@ module ActivitiesHelper
       workout_path(activity.workout, activity: activity.id)
     end
   end
+
+  def activiy_card_emoji_link(activity)
+    workout_path(activity.workout, activity: activity.id, emoji_picker: true)
+  end
 end

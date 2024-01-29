@@ -39,7 +39,7 @@ class ActivitiesController < ApplicationController
   # PATCH/PUT /activities/1
   def update
     if @activity.update(activity_params)
-      redirect_to @activity, notice: "Activity was successfully updated.", status: :see_other
+      redirect_to workout_path(@activity.workout, activity: @activity.id), notice: "Activity was successfully updated.", status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
@@ -64,6 +64,6 @@ class ActivitiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def activity_params
-      params.require(:activity).permit(:workout_id, :exercise_id)
+      params.require(:activity).permit(:workout_id, :exercise_id, :emoji)
     end
 end
