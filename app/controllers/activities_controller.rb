@@ -25,12 +25,15 @@ class ActivitiesController < ApplicationController
     @activity = Activity.new(activity_params)
     @activity.workout = @workout
     @activity.exercise = Exercise.find_by_title(params[:activity][:exercise_title])
+    @activity_set = @activity.sets.build
 
-    if @activity.save
+    ActiveRecord::Base.transaction do
+      @activity.save!
+      @activity_set.save!
       redirect_to @workout, notice: "Activity was successfully created."
-    else
-      render :new, status: :unprocessable_entity
     end
+  rescue ActiveRecord::RecordInvalid
+    render :new, status: :unprocessable_entity
   end
 
   # PATCH/PUT /activities/1
