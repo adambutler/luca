@@ -1,12 +1,23 @@
 <%= turbo_frame_tag activity, :card, class: "block mb-5 w-full relative" do %>
   <%= polaris_card do %>
     <%= render "activities/emoji_picker", activity: activity %>
+    <%= render "activities/comments", activity: activity %>
     <%= polaris_stack(vertical: true) do |stack| %>
       <% stack.with_item do %>
         <div class="flex items-center">
-          <%= link_to activiy_card_emoji_link(activity), data: {"turbo-action": "replace"}, class: "flex-shink -ml-2 px-2 mr-2 text-xl" do %>
-            <%= emoji_key_to_emoji(activity.emoji) %>
-          <% end %>
+          <div class="text-2xl">
+            <%= link_to activiy_card_emoji_link(activity), data: {"turbo-action": "replace"}, class: "inline-block -ml-2 px-2 py-2 mr-2" do %>
+              <%= emoji_key_to_emoji(activity.emoji) %>
+            <% end %>
+            <%= link_to activiy_card_comment_link(activity), data: {"turbo-action": "replace"}, class: "inline-block -ml-2 px-2 py-2 mr-2 relative" do %>
+              💬
+              <% if activity.comments.any? %>
+                <span class="bg-red-500 text-white rounded-full p-1 inline-block text-[9px] w-4 h-4 leading-[8px] absolute top-[4px] right-[4px] text-center font-bold" >
+                  <%= activity.comments.count %>
+                </span>
+              <% end %>
+            <% end %>
+          </div>
           <%= link_to activiy_card_collapsable_link(activity), data: {"turbo-action": "replace"}, class: "block mr-6" do %>
             <div class="flex items-center mb-2">
               <p class="font-bold"><%= activity.exercise.title %></p>

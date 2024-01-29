@@ -1,0 +1,13 @@
+<% if params[:comment] && params[:activity] == activity.id.to_s  %>
+  <% comment = activity.comments.first || activity.comments.build %>
+  <% url = comment.persisted? ? post_path(comment) : posts_path %>
+
+  <%= form_with model: comment, url: url, data: {"turbo-action": "replace"}, class: "z-10 flex flex-col absolute inset-0 bg-cyan-50 bg-opacity-70 backdrop-blur-sm" do |form| %>
+    <%= form.hidden_field :subject_id, value: activity.id %>
+    <%= form.hidden_field :subject_type, value: activity.model_name.name %>
+    <%= form.text_area :body, class: "rounded m-5 flex-grow border border-gray-200 bg-white bg-opacity-50", placeholder: "Add notes here" %>
+    <div class="p-5 pt-0">
+      <%= polaris_button(submit: true, full_width: true, primary: true) { "Save" } %>
+    </div>
+  <% end %>
+<% end %>

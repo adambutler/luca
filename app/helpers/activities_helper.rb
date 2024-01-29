@@ -10,4 +10,8 @@ module ActivitiesHelper
   def activiy_card_emoji_link(activity)
     workout_path(activity.workout, activity: activity.id, emoji_picker: true)
   end
+
+  def activiy_card_comment_link(activity)
+    workout_path(activity.workout, activity: activity.id, comment: true)
+  end
 end
