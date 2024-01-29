@@ -18,76 +18,79 @@
           <%= link_to activity_path(activity), data: {"turbo-method": :delete, "turbo-frame": "_top"}, class: "p-5 absolute top-0 right-0" do |form| %>
             <%= polaris_icon(name: "DeleteMinor", color: :critical) %>
           <% end %>
-          <div class="grid grid-cols-12 gap-1 text-center mt-5 text-xs">
-            <div class=""></div>
-            <div class="col-span-5 font-black uppercase text-emerald-700">Load</div>
-            <div class="col-span-5 font-black uppercase text-sky-700">Rep</div>
-            <div class=""></div>
-            
-            <div class="pb-1 "></div>
-            <div class="pb-1 col-span-2 font-semibold uppercase text-emerald-700">Goal</div>
-            <div class="pb-1 "></div>
-            <div class="pb-1 col-span-2 font-semibold uppercase text-emerald-700">Actual</div>
-            <div class="pb-1 col-span-2 font-semibold uppercase text-sky-700">Goal</div>
-            <div class="pb-1 "></div>
-            <div class="pb-1 col-span-2 font-semibold uppercase text-sky-700">Actual</div>
-            <div class="pb-1 "></div>
+          
+          <% if activity.sets.any? %>
+            <div class="grid grid-cols-12 gap-1 text-center mt-5 text-xs">
+              <div class=""></div>
+              <div class="col-span-5 font-black uppercase text-emerald-700">Load</div>
+              <div class="col-span-5 font-black uppercase text-sky-700">Rep</div>
+              <div class=""></div>
+              
+              <div class="pb-1 "></div>
+              <div class="pb-1 col-span-2 font-semibold uppercase text-emerald-700">Goal</div>
+              <div class="pb-1 "></div>
+              <div class="pb-1 col-span-2 font-semibold uppercase text-emerald-700">Actual</div>
+              <div class="pb-1 col-span-2 font-semibold uppercase text-sky-700">Goal</div>
+              <div class="pb-1 "></div>
+              <div class="pb-1 col-span-2 font-semibold uppercase text-sky-700">Actual</div>
+              <div class="pb-1 "></div>
 
-            <% activity.sets.each do |set| %>
-              <div class="flex justify-center items-center">
-                <%= link_to toggle_warmup_set_path(set), data: {"turbo-method": "put"} do %>
-                  <% if set.warmup %>
-                    <%= polaris_badge(status: :attention) { "W" } %>
-                  <% else %>
-                    <%= polaris_badge(status: :success) { set.set_number.to_s } %>
+              <% activity.sets.each do |set| %>
+                <div class="flex justify-center items-center">
+                  <%= link_to toggle_warmup_set_path(set), data: {"turbo-method": "put"} do %>
+                    <% if set.warmup %>
+                      <%= polaris_badge(status: :attention) { "W" } %>
+                    <% else %>
+                      <%= polaris_badge(status: :success) { set.set_number.to_s } %>
+                    <% end %>
                   <% end %>
-                <% end %>
-              </div>
-              <div class="flex justify-center items-center col-span-2">
-                <%= form_with(model: set, url: set_path(set)) do |form| %>
-                  <%= form.number_field :load_goal, value: set.load_goal&.prettify, step: "0.1", inputmode: "decimal", class: "w-full px-1 py-1 rounded bg-gray-50 border-gray-100 border font-semibold text-sm", onchange: "this.form.requestSubmit()" %>
-                <% end %>
-              </div>
-              <div class="flex justify-center items-center">
-                <%= form_with(model: set, url: set_path(set)) do |form| %>
-                  <%= form.hidden_field :load_actual, value: set.load_goal %>
-                  <button type="submit">
-                    <%= polaris_icon(name: "CircleChevronRightMinor", color: :subdued) %>
-                  </button>
-                <% end %>
-              </div>
-              <div class="flex justify-center items-center col-span-2">
-                <%= form_with(model: set, url: set_path(set)) do |form| %>
-                  <%= form.number_field :load_actual, value: set.load_actual&.prettify, step: "0.1", inputmode: "decimal", class: "w-full px-1 py-1 rounded bg-gray-50 border-gray-100 border font-semibold text-sm", onchange: "this.form.requestSubmit()" %>
-                <% end %>
-              </div>
-              <div class="flex justify-center items-center col-span-2">
-                <%= form_with(model: set, url: set_path(set)) do |form| %>
-                  <%= form.text_field :repetitions_goal, value: repetitions_goal_value(set), class: "w-full px-1 py-1 rounded bg-gray-50 border-gray-100 border font-semibold text-sm", onchange: "this.form.requestSubmit()" %>
-                <% end %>
-              </div>
-              <div class="flex justify-center items-center">
-                <% if can_copy_repetitions_actual_copy_value?(set) %>
+                </div>
+                <div class="flex justify-center items-center col-span-2">
                   <%= form_with(model: set, url: set_path(set)) do |form| %>
-                    <%= form.hidden_field :repetitions_actual, value: repetitions_actual_copy_value(set) %>
+                    <%= form.number_field :load_goal, value: set.load_goal&.prettify, step: "0.1", inputmode: "decimal", class: "w-full px-1 py-1 rounded bg-gray-50 border-gray-100 border font-semibold text-sm", onchange: "this.form.requestSubmit()" %>
+                  <% end %>
+                </div>
+                <div class="flex justify-center items-center">
+                  <%= form_with(model: set, url: set_path(set)) do |form| %>
+                    <%= form.hidden_field :load_actual, value: set.load_goal %>
                     <button type="submit">
                       <%= polaris_icon(name: "CircleChevronRightMinor", color: :subdued) %>
                     </button>
                   <% end %>
-                <% end %>
-              </div>
-              <div class="flex justify-center items-center col-span-2">
-                <%= form_with(model: set, url: set_path(set)) do |form| %>
-                  <%= form.number_field :repetitions_actual, value: set.repetitions_actual, inputmode: "numeric", class: "w-full px-1 py-1 rounded bg-gray-50 border-gray-100 border font-semibold text-sm", onchange: "this.form.requestSubmit()" %>
-                <% end %>
-              </div>
-              <div class="flex justify-center items-center">
-                <%= link_to set_path(set), data: {"turbo-method": :delete}, class: "p-2" do |form| %>
-                  <%= polaris_icon(name: "DeleteMinor", color: :critical) %>
-                <% end %>
-              </div>
-            <% end %>
-          </div>
+                </div>
+                <div class="flex justify-center items-center col-span-2">
+                  <%= form_with(model: set, url: set_path(set)) do |form| %>
+                    <%= form.number_field :load_actual, value: set.load_actual&.prettify, step: "0.1", inputmode: "decimal", class: "w-full px-1 py-1 rounded bg-gray-50 border-gray-100 border font-semibold text-sm", onchange: "this.form.requestSubmit()" %>
+                  <% end %>
+                </div>
+                <div class="flex justify-center items-center col-span-2">
+                  <%= form_with(model: set, url: set_path(set)) do |form| %>
+                    <%= form.text_field :repetitions_goal, value: repetitions_goal_value(set), class: "w-full px-1 py-1 rounded bg-gray-50 border-gray-100 border font-semibold text-sm", onchange: "this.form.requestSubmit()" %>
+                  <% end %>
+                </div>
+                <div class="flex justify-center items-center">
+                  <% if can_copy_repetitions_actual_copy_value?(set) %>
+                    <%= form_with(model: set, url: set_path(set)) do |form| %>
+                      <%= form.hidden_field :repetitions_actual, value: repetitions_actual_copy_value(set) %>
+                      <button type="submit">
+                        <%= polaris_icon(name: "CircleChevronRightMinor", color: :subdued) %>
+                      </button>
+                    <% end %>
+                  <% end %>
+                </div>
+                <div class="flex justify-center items-center col-span-2">
+                  <%= form_with(model: set, url: set_path(set)) do |form| %>
+                    <%= form.number_field :repetitions_actual, value: set.repetitions_actual, inputmode: "numeric", class: "w-full px-1 py-1 rounded bg-gray-50 border-gray-100 border font-semibold text-sm", onchange: "this.form.requestSubmit()" %>
+                  <% end %>
+                </div>
+                <div class="flex justify-center items-center">
+                  <%= link_to set_path(set), data: {"turbo-method": :delete}, class: "p-2" do |form| %>
+                    <%= polaris_icon(name: "DeleteMinor", color: :critical) %>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
         
           <%= form_with(model: activity.sets.build, url: activity_set_index_path(activity), class: "mt-5") do |form| %>
             <%= form.hidden_field :load_goal %>
