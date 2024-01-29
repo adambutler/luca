@@ -1,4 +1,4 @@
-<%= turbo_frame_tag activity, :card, class: "block mb-5 w-full" do %>
+<%= turbo_frame_tag activity, :card, class: "block mb-5 w-full relative" do %>
   <%= polaris_card do %>
     <%= polaris_stack(vertical: true) do |stack| %>
       <% stack.with_item do %>
@@ -15,6 +15,9 @@
         <% end %>
 
         <% if params[:activity] == activity.id.to_s %>
+          <%= link_to activity_path(activity), data: {"turbo-method": :delete, "turbo-frame": "_top"}, class: "p-5 absolute top-0 right-0" do |form| %>
+            <%= polaris_icon(name: "DeleteMinor", color: :critical) %>
+          <% end %>
           <div class="grid grid-cols-12 gap-1 text-center mt-5 text-xs">
             <div class=""></div>
             <div class="col-span-5 font-black uppercase text-emerald-700">Load</div>

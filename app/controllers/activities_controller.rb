@@ -45,7 +45,7 @@ class ActivitiesController < ApplicationController
   # DELETE /activities/1
   def destroy
     @activity.destroy!
-    redirect_to activities_url, notice: "Activity was successfully destroyed.", status: :see_other
+    redirect_to workout_path(@activity.workout), notice: "Activity was successfully destroyed.", status: :see_other
   end
 
   private
