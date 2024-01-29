@@ -2,7 +2,7 @@
   <%= polaris_card do %>
     <%= polaris_stack(vertical: true) do |stack| %>
       <% stack.with_item do %>
-        <%= link_to activiy_card_collapsable_link(activity), data: {"turbo-action": "replace"} do %>
+        <%= link_to activiy_card_collapsable_link(activity), data: {"turbo-action": "replace"}, class: "block" do %>
           <div class="flex">
             <div class="flex-shink mr-1">
               <%= polaris_icon do %>
