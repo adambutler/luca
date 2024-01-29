@@ -7,7 +7,7 @@ module EmojiHelper
     when :good then "👍"
     when :bad then "👎"
     when :hard then "😓"
-    when :medium then "😐"
+    when :medium then "👌"
     when :pain then "😖"
     when :injury then "🤕"
     when :skip then "🚫"
