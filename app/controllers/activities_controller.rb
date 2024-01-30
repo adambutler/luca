@@ -22,17 +22,7 @@ class ActivitiesController < ApplicationController
         sort_by: "ranking:desc"
       }
 
-      client = Typesense::Client.new(
-        nodes: [{
-          host: "localhost",
-          port: 8108,
-          protocol: "http"
-        }],
-        api_key: TypesenseConfig.api_key,
-        connection_timeout_seconds: 2
-      )
-
-      @results = client.collections["exercises"].documents.search(search_parameters)
+      @results = TypesenseClientManager.client.collections["exercises"].documents.search(search_parameters)
     end
   end
 
