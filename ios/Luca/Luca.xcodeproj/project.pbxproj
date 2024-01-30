@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E48509892B68F2840090EC72 /* path-configuration.json in Resources */ = {isa = PBXBuildFile; fileRef = E48509882B68F2840090EC72 /* path-configuration.json */; };
 		E4B0EDC32B5E932C00C81691 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B0EDC22B5E932C00C81691 /* AppDelegate.swift */; };
 		E4B0EDC52B5E932C00C81691 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B0EDC42B5E932C00C81691 /* SceneDelegate.swift */; };
 		E4B0EDC72B5E932C00C81691 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B0EDC62B5E932C00C81691 /* ViewController.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E48509882B68F2840090EC72 /* path-configuration.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "path-configuration.json"; sourceTree = "<group>"; };
 		E4B0EDBF2B5E932C00C81691 /* Luca.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Luca.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4B0EDC22B5E932C00C81691 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E4B0EDC42B5E932C00C81691 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				E4B0EDCB2B5E932D00C81691 /* Assets.xcassets */,
 				E4B0EDCD2B5E932D00C81691 /* LaunchScreen.storyboard */,
 				E4B0EDD02B5E932D00C81691 /* Info.plist */,
+				E48509882B68F2840090EC72 /* path-configuration.json */,
 			);
 			path = Luca;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4B0EDCF2B5E932D00C81691 /* LaunchScreen.storyboard in Resources */,
+				E48509892B68F2840090EC72 /* path-configuration.json in Resources */,
 				E4B0EDCC2B5E932D00C81691 /* Assets.xcassets in Resources */,
 				E4B0EDCA2B5E932C00C81691 /* Main.storyboard in Resources */,
 			);
@@ -450,9 +454,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = B95VLW3H86;
+				DEVELOPMENT_TEAM = FJ6WRZM2DP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Luca/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Luca;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -478,9 +484,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = B95VLW3H86;
+				DEVELOPMENT_TEAM = FJ6WRZM2DP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Luca/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Luca;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

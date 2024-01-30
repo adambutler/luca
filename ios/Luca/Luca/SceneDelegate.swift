@@ -8,7 +8,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let _ = (scene as? UIWindowScene) else { return }
         window!.rootViewController = navigationController
+//        visit(url: URL(string: "https://turbo-native-demo.glitch.me")!)
         visit(url: URL(string: "https://luca.labfoo.dev")!)
+//        visit(url: URL(string: "https://marten-more-dingo.ngrok-free.app")!)
     }
     
     private func visit(url: URL) {
@@ -20,8 +22,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private lazy var session: Session = {
         let session = Session()
         session.delegate = self
+        session.pathConfiguration = pathConfiguration
         return session
     }()
+    
+    private lazy var pathConfiguration = PathConfiguration(sources: [
+        .file(Bundle.main.url(forResource: "path-configuration", withExtension: "json")!),
+    ])
 }
 
 extension SceneDelegate: SessionDelegate {
