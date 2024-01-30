@@ -1,0 +1,13 @@
+default: &default
+  api_key: "xyz"
+  host: "localhost"
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
+  host: 49.13.119.206

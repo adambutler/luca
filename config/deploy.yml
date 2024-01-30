@@ -26,6 +26,7 @@ env:
   secret:
     - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
+    - TYPESENSE_API_KEY
 
 # Use a different ssh user than root
 # ssh:
@@ -43,6 +44,15 @@ env:
 
 # Use accessory services (secrets come from .env).
 accessories:
+  search:
+    image: typesense/typesense:0.26.0.rc50
+    host: 49.13.119.206
+    port: 8108
+    secret:
+      - TYPESENSE_API_KEY
+    directories:
+      - typesense_data:/data
+    cmd: "--data-dir /data --api-key=xyz --enable-cors"
   db:
     image: postgres:15
     host: 49.13.119.206

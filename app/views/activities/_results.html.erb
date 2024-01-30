@@ -1,0 +1,31 @@
+<%= turbo_frame_tag :search_results do %>
+  <% if results %>
+    <ul role="list" class="divide-y divide-gray-100 bg-white border container mx-auto rounded">
+      <% results["hits"].each do |hit| %>
+        <li>
+          <%= form_with(model: [workout, activity]) do |form| %>
+            <%= form.button class: "flex justify-between gap-x-6 p-5 text-left border-2 border-white hover:border-blue-500 rounded" do %>
+              <%= form.hidden_field :exercise_id, value: hit["document"]["id"] %>
+              <div class="flex min-w-0 gap-x-4">
+                <div>
+                  <svg class="w-6 h-6" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><title>ionicons-v5-q</title><line x1="48" y1="256" x2="464" y2="256" style="fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/><rect x="384" y="128" width="32" height="256" rx="16" ry="16" style="fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/><rect x="96" y="128" width="32" height="256" rx="16" ry="16" style="fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/><rect x="32" y="192" width="16" height="128" rx="8" ry="8" style="fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/><rect x="464" y="192" width="16" height="128" rx="8" ry="8" style="fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/></svg>
+                </div>
+                <div class="min-w-0 flex-auto">
+                  <p class="text-sm font-semibold leading-6 text-gray-900"><%= raw hit["highlights"][0]["snippet"] %></p>
+                  <p class="mt-1 text-xs leading-5 text-gray-500"><%= hit["document"]["description"] %></p>
+                </div>
+              </div>
+              <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                <p class="text-sm leading-6 text-gray-900">
+                  <span class="mt-1 text-xs leading-5 text-gray-500"><%= hit["document"]["level"] %></span>
+                  &nbsp;
+                  <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20"><%= hit["document"]["exercise_type"] %></p></span>
+                </p>
+              </div>
+            <% end %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>

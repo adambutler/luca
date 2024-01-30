@@ -14,6 +14,26 @@ class ActivitiesController < ApplicationController
   # GET /activities/new
   def new
     @activity = Activity.new
+
+    if params[:query]
+      search_parameters = {
+        q: params[:query],
+        query_by: "title",
+        sort_by: "ranking:desc"
+      }
+
+      client = Typesense::Client.new(
+        nodes: [{
+          host: "localhost",
+          port: 8108,
+          protocol: "http"
+        }],
+        api_key: TypesenseConfig.api_key,
+        connection_timeout_seconds: 2
+      )
+
+      @results = client.collections["exercises"].documents.search(search_parameters)
+    end
   end
 
   # GET /activities/1/edit
@@ -49,6 +69,14 @@ class ActivitiesController < ApplicationController
   def destroy
     @activity.destroy!
     redirect_to workout_path(@activity.workout), notice: "Activity was successfully destroyed.", status: :see_other
+  end
+
+  def search
+    if params[:search][:query].present?
+      redirect_to(new_workout_activity_path(query: params[:search][:query]))
+    else
+      redirect_to(new_workout_activity_path)
+    end
   end
 
   private
