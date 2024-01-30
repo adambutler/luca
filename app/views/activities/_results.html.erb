@@ -3,7 +3,7 @@
     <ul role="list" class="divide-y divide-gray-100 bg-white border container mx-auto rounded">
       <% results["hits"].each do |hit| %>
         <li>
-          <%= form_with(model: [workout, activity]) do |form| %>
+          <%= form_with model: [workout, activity,], data: {"turbo-frame": "_top"}  do |form| %>
             <%= form.button class: "flex justify-between gap-x-6 p-5 text-left border-2 border-white hover:border-blue-500 rounded" do %>
               <%= form.hidden_field :exercise_id, value: hit["document"]["id"] %>
               <div class="flex min-w-0 gap-x-4">

@@ -44,7 +44,6 @@ class ActivitiesController < ApplicationController
   def create
     @activity = Activity.new(activity_params)
     @activity.workout = @workout
-    @activity.exercise = Exercise.find_by_title(params[:activity][:exercise_title])
     @activity_set = @activity.sets.build
 
     ActiveRecord::Base.transaction do
