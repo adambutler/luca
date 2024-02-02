@@ -81,6 +81,6 @@ class ActivitiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def activity_params
-      params.require(:activity).permit(:workout_id, :exercise_id, :emoji)
+      params.require(:activity).permit(:workout_id, :exercise_id, :emoji, :split)
     end
 end

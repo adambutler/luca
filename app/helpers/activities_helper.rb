@@ -14,4 +14,8 @@ module ActivitiesHelper
   def activiy_card_comment_link(activity)
     workout_path(activity.workout, activity: activity.id, comment: true)
   end
+
+  def activiy_card_config_link(activity)
+    workout_path(activity.workout, activity: activity.id, config: true)
+  end
 end

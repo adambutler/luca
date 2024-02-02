@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_29_165529) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_30_160107) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,6 +20,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_29_165529) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "emoji", default: 0, null: false
+    t.boolean "split", default: false, null: false
     t.index ["emoji"], name: "index_activities_on_emoji"
     t.index ["exercise_id"], name: "index_activities_on_exercise_id"
     t.index ["workout_id"], name: "index_activities_on_workout_id"

@@ -7,7 +7,23 @@ class ActivitySet < ApplicationRecord
   after_initialize :setup_default_values
 
   def set_number
-    sibilings.where(warmup: false).where("id < ?", id).count + 1
+    sibilings.where(warmup: false).where("id < ?", id).count
+      .then { |set_number| split? ? set_number / 2 : set_number }
+      .then { |set_number| set_number + 1 }
+  end
+
+  def set_letter
+    return nil unless split?
+
+    sibilings.where(warmup: false).where("id < ?", id).count.even? ? "L" : "R"
+  end
+
+  def set_label
+    "#{set_number}#{set_letter}"
+  end
+
+  def split?
+    activity.split?
   end
 
   def sibilings

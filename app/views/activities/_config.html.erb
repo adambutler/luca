@@ -1,0 +1,14 @@
+<% if params[:config] && params[:activity] == activity.id.to_s  %>
+  <%= form_with(model: activity, url: activity_path(activity), data: {"turbo-action": "replace"}, class: "z-10 flex flex-col absolute inset-0 bg-cyan-50 bg-opacity-70 backdrop-blur-sm") do |form| %>
+    <div class="rounded m-5 flex-grow">
+      <h2 class="text-xl font-bold">Settings</h2>
+      <div class="mt-5 flex items-center">
+        <%= form.check_box :split, class: "mr-5 w-8 h-8" %>
+        <%= form.label :split, class: "text-lg" %>
+      </div>
+    </div>
+    <div class="p-5 pt-0">
+      <%= polaris_button(submit: true, full_width: true, primary: true) { "Save" } %>
+    </div>
+  <% end %>
+<% end %>
