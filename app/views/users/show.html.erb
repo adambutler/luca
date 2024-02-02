@@ -1,5 +1,7 @@
 <% content_for(:heading_text) { @user.full_name } %>
 
+<%= render "timeline", user: @user %>
+
 <div class="relative w-full flex gap-6 snap-x overflow-x-auto py-5">
   <% @workouts.each do |workout| %>
     <div class="snap-center shrink-0 w-5/6 max-w-96 px-1 first:pl-8 last:pr-8">

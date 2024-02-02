@@ -11,4 +11,8 @@ class Activity < ApplicationRecord
   def has_warmup?
     sets.warmup.any?
   end
+
+  def display_title
+    exercise.title
+  end
 end
