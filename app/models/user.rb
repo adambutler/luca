@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :workouts
   has_many :activities, through: :workouts
+  has_many :authored_posts, foreign_key: :author_id, dependent: :destroy, class_name: "Post"
 
   has_many :memberships_as_client, foreign_key: :client_id, dependent: :destroy, class_name: "ClientMembership"
   has_many :memberships_as_trainer, foreign_key: :trainer_id, dependent: :destroy, class_name: "ClientMembership"
