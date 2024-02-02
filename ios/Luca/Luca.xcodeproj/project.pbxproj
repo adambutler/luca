@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,7 +16,7 @@
 		C153F0112578057A00926D30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C153F0102578057A00926D30 /* Assets.xcassets */; };
 		C153F0142578057A00926D30 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C153F0122578057A00926D30 /* LaunchScreen.storyboard */; };
 		C153F03525784BEA00926D30 /* NumbersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C153F03425784BEA00926D30 /* NumbersViewController.swift */; };
-		C175FE782579905300C8DF50 /* Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C175FE772579905300C8DF50 /* Demo.swift */; };
+		C175FE782579905300C8DF50 /* Luca.swift in Sources */ = {isa = PBXBuildFile; fileRef = C175FE772579905300C8DF50 /* Luca.swift */; };
 		CB4FB651273AE23B00119FD3 /* TurboNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4FB650273AE23B00119FD3 /* TurboNavigationController.swift */; };
 		E226F7822AB1B7F20059D594 /* Strada in Frameworks */ = {isa = PBXBuildFile; productRef = E226F7812AB1B7F20059D594 /* Strada */; };
 		E226F7842AB1BBF30059D594 /* TurboWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226F7832AB1BBF30059D594 /* TurboWebViewController.swift */; };
@@ -44,16 +44,16 @@
 		84ACD72F2AAE733C00234C57 /* turbo-ios */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "turbo-ios"; path = ..; sourceTree = "<group>"; };
 		C106CBE2257FF87700498F6F /* ErrorPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPresenter.swift; sourceTree = "<group>"; };
 		C10DF227257AB81D009412E7 /* path-configuration.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "path-configuration.json"; sourceTree = "<group>"; };
-		C153F0042578057900926D30 /* Turbo Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Turbo Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C153F0042578057900926D30 /* Turbo Luca.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Turbo Luca.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C153F0072578057900926D30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C153F0092578057900926D30 /* SceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneController.swift; sourceTree = "<group>"; };
 		C153F00E2578057900926D30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C153F0102578057A00926D30 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C153F0132578057A00926D30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C153F0152578057A00926D30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C153F0332578302F00926D30 /* Turbo Demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Turbo Demo.entitlements"; sourceTree = "<group>"; };
+		C153F0332578302F00926D30 /* Luca.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Luca.entitlements; sourceTree = "<group>"; };
 		C153F03425784BEA00926D30 /* NumbersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumbersViewController.swift; sourceTree = "<group>"; };
-		C175FE772579905300C8DF50 /* Demo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demo.swift; sourceTree = "<group>"; };
+		C175FE772579905300C8DF50 /* Luca.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Luca.swift; sourceTree = "<group>"; };
 		CB4FB650273AE23B00119FD3 /* TurboNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurboNavigationController.swift; sourceTree = "<group>"; };
 		E226F7832AB1BBF30059D594 /* TurboWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurboWebViewController.swift; sourceTree = "<group>"; };
 		E226F7862AB1BE030059D594 /* WKWebViewConfiguration+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKWebViewConfiguration+App.swift"; sourceTree = "<group>"; };
@@ -94,7 +94,7 @@
 		C153EFFB2578057900926D30 = {
 			isa = PBXGroup;
 			children = (
-				C153F0062578057900926D30 /* Demo */,
+				C153F0062578057900926D30 /* Luca */,
 				84ACD72E2AAE733C00234C57 /* Packages */,
 				C153F0052578057900926D30 /* Products */,
 				84ACD7302AAE743000234C57 /* Frameworks */,
@@ -104,18 +104,18 @@
 		C153F0052578057900926D30 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C153F0042578057900926D30 /* Turbo Demo.app */,
+				C153F0042578057900926D30 /* Turbo Luca.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C153F0062578057900926D30 /* Demo */ = {
+		C153F0062578057900926D30 /* Luca */ = {
 			isa = PBXGroup;
 			children = (
 				E226F7882AB1BF210059D594 /* Strada */,
 				E226F7852AB1BDF10059D594 /* Web */,
 				CB4FB64F273AE22800119FD3 /* Navigation */,
-				C175FE772579905300C8DF50 /* Demo.swift */,
+				C175FE772579905300C8DF50 /* Luca.swift */,
 				C153F0072578057900926D30 /* AppDelegate.swift */,
 				C153F0092578057900926D30 /* SceneController.swift */,
 				E226F7832AB1BBF30059D594 /* TurboWebViewController.swift */,
@@ -125,10 +125,10 @@
 				C153F00D2578057900926D30 /* Main.storyboard */,
 				C153F0122578057A00926D30 /* LaunchScreen.storyboard */,
 				C153F0152578057A00926D30 /* Info.plist */,
-				C153F0332578302F00926D30 /* Turbo Demo.entitlements */,
+				C153F0332578302F00926D30 /* Luca.entitlements */,
 				C10DF227257AB81D009412E7 /* path-configuration.json */,
 			);
-			name = Demo;
+			name = Luca;
 			sourceTree = "<group>";
 		};
 		CB4FB64F273AE22800119FD3 /* Navigation */ = {
@@ -161,9 +161,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C153F0032578057900926D30 /* Demo */ = {
+		C153F0032578057900926D30 /* Luca */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C153F0182578057A00926D30 /* Build configuration list for PBXNativeTarget "Demo" */;
+			buildConfigurationList = C153F0182578057A00926D30 /* Build configuration list for PBXNativeTarget "Luca" */;
 			buildPhases = (
 				C153F0002578057900926D30 /* Sources */,
 				C153F0012578057900926D30 /* Frameworks */,
@@ -174,13 +174,13 @@
 			);
 			dependencies = (
 			);
-			name = Demo;
+			name = Luca;
 			packageProductDependencies = (
 				84ACD7312AAE743300234C57 /* Turbo */,
 				E226F7812AB1B7F20059D594 /* Strada */,
 			);
 			productName = Demo;
-			productReference = C153F0042578057900926D30 /* Turbo Demo.app */;
+			productReference = C153F0042578057900926D30 /* Turbo Luca.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -197,7 +197,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C153EFFF2578057900926D30 /* Build configuration list for PBXProject "Demo" */;
+			buildConfigurationList = C153EFFF2578057900926D30 /* Build configuration list for PBXProject "Luca" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -208,12 +208,13 @@
 			mainGroup = C153EFFB2578057900926D30;
 			packageReferences = (
 				E226F7802AB1B7F20059D594 /* XCRemoteSwiftPackageReference "strada-ios" */,
+				E4053C022B69534D00C99CAF /* XCRemoteSwiftPackageReference "turbo-ios" */,
 			);
 			productRefGroup = C153F0052578057900926D30 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C153F0032578057900926D30 /* Demo */,
+				C153F0032578057900926D30 /* Luca */,
 			);
 		};
 /* End PBXProject section */
@@ -244,7 +245,7 @@
 				E226F78C2AB1CE2E0059D594 /* BridgeComponent+App.swift in Sources */,
 				CB4FB651273AE23B00119FD3 /* TurboNavigationController.swift in Sources */,
 				E226F7872AB1BE030059D594 /* WKWebViewConfiguration+App.swift in Sources */,
-				C175FE782579905300C8DF50 /* Demo.swift in Sources */,
+				C175FE782579905300C8DF50 /* Luca.swift in Sources */,
 				C153F00A2578057900926D30 /* SceneController.swift in Sources */,
 				E226F78E2AB1D2C20059D594 /* MenuComponent.swift in Sources */,
 				E226F7902AB1D7260059D594 /* OverflowMenuComponent.swift in Sources */,
@@ -395,17 +396,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Turbo Demo.entitlements";
+				CODE_SIGN_ENTITLEMENTS = Luca.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2WNYUYRS7G;
+				DEVELOPMENT_TEAM = FJ6WRZM2DP;
 				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Luca;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = dev.hotwire.turbo.demo;
-				PRODUCT_NAME = "Turbo Demo";
+				PRODUCT_BUNDLE_IDENTIFIER = dev.labfoo.luca;
+				PRODUCT_NAME = "Turbo Luca";
 				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
@@ -418,17 +421,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Turbo Demo.entitlements";
+				CODE_SIGN_ENTITLEMENTS = Luca.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2WNYUYRS7G;
+				DEVELOPMENT_TEAM = FJ6WRZM2DP;
 				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Luca;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = dev.hotwire.turbo.demo;
-				PRODUCT_NAME = "Turbo Demo";
+				PRODUCT_BUNDLE_IDENTIFIER = dev.labfoo.luca;
+				PRODUCT_NAME = "Turbo Luca";
 				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
@@ -439,7 +444,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C153EFFF2578057900926D30 /* Build configuration list for PBXProject "Demo" */ = {
+		C153EFFF2578057900926D30 /* Build configuration list for PBXProject "Luca" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C153F0162578057A00926D30 /* Debug */,
@@ -448,7 +453,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C153F0182578057A00926D30 /* Build configuration list for PBXNativeTarget "Demo" */ = {
+		C153F0182578057A00926D30 /* Build configuration list for PBXNativeTarget "Luca" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C153F0192578057A00926D30 /* Debug */,
@@ -463,6 +468,14 @@
 		E226F7802AB1B7F20059D594 /* XCRemoteSwiftPackageReference "strada-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hotwired/strada-ios.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		E4053C022B69534D00C99CAF /* XCRemoteSwiftPackageReference "turbo-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hotwired/turbo-ios";
 			requirement = {
 				branch = main;
 				kind = branch;

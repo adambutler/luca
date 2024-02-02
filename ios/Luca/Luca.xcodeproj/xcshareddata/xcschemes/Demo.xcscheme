@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C153F0032578057900926D30"
-               BuildableName = "Turbo Demo.app"
-               BlueprintName = "Demo"
-               ReferencedContainer = "container:Demo.xcodeproj">
+               BuildableName = "Turbo Luca.app"
+               BlueprintName = "Luca"
+               ReferencedContainer = "container:Luca.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C153F0032578057900926D30"
-            BuildableName = "Turbo Demo.app"
-            BlueprintName = "Demo"
-            ReferencedContainer = "container:Demo.xcodeproj">
+            BuildableName = "Turbo Luca.app"
+            BlueprintName = "Luca"
+            ReferencedContainer = "container:Luca.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C153F0032578057900926D30"
-            BuildableName = "Turbo Demo.app"
-            BlueprintName = "Demo"
-            ReferencedContainer = "container:Demo.xcodeproj">
+            BuildableName = "Turbo Luca.app"
+            BlueprintName = "Luca"
+            ReferencedContainer = "container:Luca.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
