@@ -7,7 +7,9 @@ export default class extends Controller {
 
   connect() {
     useResize(this);
+  }
 
+  scrollIntoView() {
     if (this.startingSlideValue) {
       this.element
         .querySelector(`#${this.startingSlideValue}`)
@@ -22,5 +24,10 @@ export default class extends Controller {
     const padding = remainder / 2;
     this.leftPaddingTarget.style.width = `${padding}px`;
     this.rightPaddingTarget.style.width = `${padding}px`;
+
+    if (!this.firstResizeComplete) {
+      this.scrollIntoView();
+      this.firstResizeComplete = true;
+    }
   }
 }
