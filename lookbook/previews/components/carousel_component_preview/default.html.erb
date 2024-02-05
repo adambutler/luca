@@ -1,0 +1,9 @@
+<%= render CarouselComponent.new(starting_slide: "slide_3") do |carousel| %>
+  <% 10.times do |index| %>
+    <%= carousel.with_slide do %>
+      <div id="slide_<%= index %>" class="p-3 snap-center shrink-0 first:pl-8 last:pr-8" data-carousel-target="slide">
+        <img class="shrink-0 w-80 h-40 rounded-lg shadow-xl bg-white" src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=320&amp;h=160&amp;q=80">
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

@@ -21,8 +21,8 @@ workouts = [
 
 workout = workouts.first
 
-activity = workout.activities.create!(workout: workout, exercise: exercise)
 exercise = Exercise.find_by!(title: "Romanian Deadlift")
+activity = workout.activities.create!(workout: workout, exercise: exercise)
 
 activity.sets.create!({
   load_goal: 20,
@@ -82,3 +82,7 @@ activity.sets.create!({
   repetitions_type: "limit",
   warmup: false
 })
+
+Exercise.destroy_typesense_schema!
+Exercise.create_typesense_schema!
+Exercise.all.each { |exercise| exercise.import_to_typesense! }

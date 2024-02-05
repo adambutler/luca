@@ -1,16 +1,13 @@
 <% content_for(:heading_text) { @user.full_name } %>
 
-<%= render "timeline", user: @user %>
+<%= render "workouts/carousel", workouts: @workouts, user: @user %>
 
-<div class="relative w-full flex gap-6 snap-x overflow-x-auto py-5">
-  <% @workouts.each do |workout| %>
-    <div class="snap-center shrink-0 w-5/6 max-w-96 px-1 first:pl-8 last:pr-8">
-      <%= render "workouts/card", workout: workout %>
-    </div>
+<div class="container mx-auto">
+  <%= link_to new_workout_path(user: @user) do %>
+    <%= polaris_button(full_width: true) { "Add Workout" } %>
   <% end %>
+
+  <div class="mt-5">
+    <%= render "timeline", user: @user %>
+  </div>
 </div>
-
-<%= link_to new_workout_path(user: @user) do %>
-  <%= polaris_button(full_width: true) { "Add Workout" } %>
-<% end %>
-

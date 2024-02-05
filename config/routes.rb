@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount Lookbook::Engine, at: "/lookbook"
+  
   devise_for :users
   
   resources :users, only: [:show]

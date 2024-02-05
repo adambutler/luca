@@ -20,25 +20,11 @@
 
   <body style="<%= polaris_body_styles %>">
     <main class="mx-auto">
-      <%=  link_to root_path do %>
-        <%= image_tag 'luca.svg', class: "w-48 mx-auto my-5" %>
-        <div class="container mx-auto my-5 text-center">
-          <%= polaris_text(variant: :heading4xl, as: :h1) { "Luca Training" } %>
+      <section class="bg-gray-50 dark:bg-gray-900">
+        <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+          <%= yield %>
         </div>
-      <% end %>
-
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-
-      <% if content_for?(:heading_text) %>
-        <div class="container mx-auto my-5">
-          <%= polaris_text(variant: :heading4xl, as: :h1) do %>
-            <%= yield :heading_text %>
-          <% end %>
-        </div>
-      <% end %>
-      
-      <%= yield %>
+      </section>
     </main>
   </body>
 </html>

@@ -1,0 +1,11 @@
+<div class="scrollbar-hide relative w-full flex snap-x snap-mandatory overflow-x-auto pb-14" data-controller="carousel" data-carousel-starting-slide-value="<%= starting_slide %>">
+  <div class="snap-center shrink-0">
+    <div class="shrink-0 w-4 sm:w-48" data-carousel-target="leftPadding"></div>
+  </div>
+  <% slides.each do |slide| %>
+    <%= slide %>
+  <% end %> 
+  <div class="snap-center shrink-0">
+    <div class="shrink-0 w-4 sm:w-48" data-carousel-target="rightPadding"></div>
+  </div>
+</div>

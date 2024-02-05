@@ -46,6 +46,9 @@ gem "polaris_view_components"
 gem "requestjs-rails"
 gem "typesense"
 gem "anyway_config"
+gem "lookbook", ">= 2.2.0"
+gem "view_component"
+gem "active_attr"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -67,4 +70,7 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+  # 
+  gem "listen"
+  gem "actioncable"
 end
