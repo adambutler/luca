@@ -5,9 +5,18 @@
     <%= polaris_text(variant: :heading2xl, as: :h2) { "Activities" } %>
   </div>
 
-  <div class="mb-5">
+  <div
+    class="mb-5"
+    <% if params[:activity] %>
+      <% activity = Activity.find(params[:activity]) %>
+      data-controller="scroll-to"
+      data-scroll-to-selector-value="#<%= dom_id(activity) %>"
+    <% end%>
+  >
     <% workout.activities.each do |activity| %>
-      <%= render "activities/card", activity: activity %>
+      <%= content_tag :div, id: dom_id(activity) do %>
+        <%= render "activities/card", activity: activity %>
+      <% end %>
     <% end %>
   </div>
 

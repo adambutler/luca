@@ -1,4 +1,6 @@
 class ActivitiesController < ApplicationController
+  include ActionView::RecordIdentifier
+  
   before_action :set_workout, only: %i[new create]
   before_action :set_activity, only: %i[ show edit update destroy ]
 
@@ -39,7 +41,7 @@ class ActivitiesController < ApplicationController
     ActiveRecord::Base.transaction do
       @activity.save!
       @activity_set.save!
-      redirect_to @workout, notice: "Activity was successfully created."
+      redirect_to workout_path(@workout, activity: @activity), notice: "Activity was successfully created."
     end
   rescue ActiveRecord::RecordInvalid
     render :new, status: :unprocessable_entity

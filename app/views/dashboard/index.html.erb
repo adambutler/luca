@@ -6,9 +6,10 @@
   <% end %>
 <% end %>
 
-<%= render "workouts/carousel", workouts: @workouts, user: @user %>
+<div class="container mx-auto">
+  <%= render "workouts/carousel", workouts: @workouts, user: @user %>
 
-<%= link_to new_workout_path do %>
-  <%= polaris_button(full_width: true) { "Add Workout" } %>
-<% end %>
-
+  <%= link_to new_workout_path do %>
+    <%= polaris_button(full_width: true) { "Add Workout" } %>
+  <% end %>
+</div>
