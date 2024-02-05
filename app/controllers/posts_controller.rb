@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
+    @post.author = current_user
     
     if @post.save!
       redirect_to workout_path(@post.subject.workout, activity: @post.subject.id), notice: "Post was successfully created."
