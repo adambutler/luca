@@ -154,6 +154,8 @@ GEM
       net-pop
       net-smtp
     marcel (1.0.2)
+    material_icons (4.0.0)
+      railties (>= 3.2)
     method_source (1.0.0)
     mini_mime (1.1.5)
     minitest (5.21.2)
@@ -365,6 +367,7 @@ DEPENDENCIES
   importmap-rails
   listen
   lookbook (>= 2.2.0)
+  material_icons
   pg (~> 1.1)
   polaris_view_components
   pry

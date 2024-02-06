@@ -10,6 +10,6 @@
   <%= render "workouts/carousel", workouts: @workouts, user: @user %>
 
   <%= link_to new_workout_path do %>
-    <%= polaris_button(full_width: true) { "Add Workout" } %>
+    <%= render(ButtonComponent.new(type: :primary, full_width: true)) { "Add Workout" } %>
   <% end %>
 </div>

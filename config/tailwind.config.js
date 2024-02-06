@@ -22,4 +22,21 @@ module.exports = {
     require("@tailwindcss/typography"),
     require("@tailwindcss/container-queries"),
   ],
+  safelist: [
+    // Badges
+    {
+      pattern: /bg-(emerald|yellow|blue)-(300)/,
+    },
+    {
+      pattern: /text-(emerald|yellow|blue)-(800)/,
+    },
+    // Buttons
+    {
+      pattern: /bg-(blue|slate|red)-(500)/,
+    },
+    {
+      pattern: /bg-(blue|slate|red)-(700)/,
+      variants: ["hover"],
+    },
+  ],
 };

@@ -1,5 +1,5 @@
 <% if params[:emoji_picker] && params[:activity] == activity.id.to_s  %>
-  <div class="z-10 flex justify-center items-center absolute inset-0 bg-cyan-50 bg-opacity-70 backdrop-blur-sm">
+  <%= render BlurOverlayComponent.new do %>
     <div class="text-3xl text-center text-balance">
       <% Activity.emojis.keys.each do |emoji_key| %>
         <%= form_with(model: activity, url: activity_path(activity), data: {"turbo-action": "replace"}, class: "inline-block") do |form| %>
@@ -8,5 +8,5 @@
         <% end %>
       <% end %>
     </div>
-  </div>
+  <% end %>
 <% end %>

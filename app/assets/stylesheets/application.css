@@ -12,14 +12,42 @@
  *
  *= require_tree .
  *= require_self
+ *= require material_icons
  */
 
+:root {
+  --p-color-bg-app: #020617 !important;
+  --p-color-text: #f4f4f5 !important;
+}
+
  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 /* For IE, Edge and Firefox */
 .scrollbar-hide {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.auto-hide {
+  animation: hide 300ms ease-in-out 3s forwards;
+}
+
+@keyframes hide {
+  to {
+    opacity: 0;
+    pointer-events: none;
+  }
 }

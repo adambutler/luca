@@ -49,6 +49,7 @@ gem "anyway_config"
 gem "lookbook", ">= 2.2.0"
 gem "view_component"
 gem "active_attr"
+gem "material_icons"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"

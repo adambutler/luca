@@ -1,11 +1,11 @@
 <div class="mb-5 text-center">
   <%= link_to new_user_session_path do %>
-    <%= polaris_button { "Sign in" } %>
+    <%= render(ButtonComponent.new(type: :primary)) { "Sign in" } %>
   <% end %>
 </div>
 
 <div class="mb-5 text-center">
   <%= link_to new_user_registration_path do %>
-    <%= polaris_button { "Sign up" } %>
+    <%= render(ButtonComponent.new(type: :secondary)) { "Sign up" } %>
   <% end %>
 </div>

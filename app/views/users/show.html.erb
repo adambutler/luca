@@ -4,7 +4,7 @@
 
 <div class="container mx-auto">
   <%= link_to new_workout_path(user: @user) do %>
-    <%= polaris_button(full_width: true) { "Add Workout" } %>
+    <%= render(ButtonComponent.new(type: :primary, full_width: true)) { "Add Workout" } %>
   <% end %>
 
   <div class="mt-5">

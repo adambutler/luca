@@ -1,26 +1,26 @@
 <%= link_to workout_path(workout) do %>
-  <%= polaris_callout_card do |callout| %>
+  <%= render CardComponent.new(css_classes: "w-72") do %>
     <%= polaris_stack(vertical: true) do |stack| %>
       <% stack.with_item do %>
         <div class="flex">
-          <div class="flex-shink mr-1">
-            <%= polaris_icon(name: "ClockMinor") %>
+          <div class="flex-shink mr-2">
+            <%= render IconComponent.new(icon: :schedule, size: :xl, color: :slate) %>
           </div>
           <%= workout.scheduled_at.to_formatted_s(:short) %>
         </div>
       <% end %>
       <% stack.with_item do %>
         <div class="flex">
-          <div class="flex-shink mr-1">
-            <%= polaris_icon(name: "LocationsMinor") %>
+          <div class="flex-shink mr-2">
+            <%= render IconComponent.new(icon: :location_on , size: :xl, color: :slate) %>
           </div>
           <%= "Gymset Clifton" %>
         </div>
       <% end %>
       <% stack.with_item do %>
         <div class="flex">
-          <div class="flex-shink mr-1">
-            <%= polaris_icon(name: "LocationsMinor") %>
+          <div class="flex-shink mr-2">
+            <%= render IconComponent.new(icon: :face , size: :xl, color: :slate) %>
           </div>
           <%= "Luca" %>
         </div>
