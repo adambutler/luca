@@ -1,0 +1,5 @@
+<div class="container mx-auto mb-5">
+  <%= render CardComponent.new do %>
+    <%= render CalendarComponent.for_user_workouts(user: user, date: date) %>
+  <% end %>
+</div>

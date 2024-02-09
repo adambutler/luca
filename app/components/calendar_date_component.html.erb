@@ -1,0 +1,12 @@
+<div class="p-0.5 border-t border-gray-800 flex">
+  <%= link_to url_for(request.params.merge(date: date)), class: button_css_classes do %>
+    <time datetime="2022-02-01"><%= date.mday %></time>
+
+    
+    <span class="block text-xs tracking-[-.1.25em] text-center text-balance mb-1">
+      <% emojis.each do |emoji| %>
+        <%= content_tag :span, emoji %>
+      <% end %>
+    </span>
+  <% end %>
+</div>
