@@ -1,11 +1,13 @@
-<div class="relative w-full overflow-x-auto py-5">
-  <%= render CarouselComponent.new(starting_slide: dom_id(Workout.primary_for_user(user))) do |carousel| %>
-    <% workouts.each do |workout| %>
-      <%= carousel.with_slide do %>
-        <div id="<%= dom_id(workout) %>" class="p-3 snap-center shrink-0 first:pl-8 last:pr-8" data-carousel-target="slide">
-          <%= render "workouts/card", workout: workout %>
-        </div>
+<% if workouts.any? %>
+  <div class="relative w-full overflow-x-auto py-5">
+    <%= render CarouselComponent.new(starting_slide: dom_id(Workout.primary_for_user(user))) do |carousel| %>
+      <% workouts.each do |workout| %>
+        <%= carousel.with_slide do %>
+          <div id="<%= dom_id(workout) %>" class="p-3 snap-center shrink-0 first:pl-8 last:pr-8" data-carousel-target="slide">
+            <%= render "workouts/card", workout: workout %>
+          </div>
+        <% end %>
       <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>
+<% end %>
