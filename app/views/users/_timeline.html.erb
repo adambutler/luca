@@ -5,20 +5,20 @@
         <span class="text-xs text-slate-500"><%= post.created_at.to_formatted_s(:short) %></span>
       </div>
 
-      <div class="relative last:after:hidden after:absolute after:top-7 after:bottom-0 after:start-3.5 after:w-px after:-translate-x-[0.5px] after:bg-gray-200">
+      <div class="relative last:after:hidden after:absolute after:top-7 after:bottom-0 after:start-3.5 after:w-px after:-translate-x-[0.5px] after:bg-slate-700">
         <div class="relative z-10 w-7 h-7 flex justify-center items-center">
-          <div class="w-2 h-2 rounded-full bg-slate-500"></div>
+          <div class="w-2 h-2 rounded-full bg-slate-400"></div>
         </div>
       </div>
 
       <div class="grow pt-0.5 pb-8">
-        <h3 class="flex gap-x-1.5 font-semibold text-gray-800">
+        <h3 class="flex gap-x-1.5 font-semibold text-slate-400">
           Added note to <%= link_to post.subject.display_title, post.url, class: "text-blue-600" %>
         </h3>
-        <p class="mt-1 text-sm text-gray-600">
+        <p class="mt-1 text-sm text-slate-600">
           <%= post.body %>
         </p>
-        <button type="button" class="mt-1 -ms-1 p-1 inline-flex items-center gap-x-2 text-xs rounded-lg border border-transparent text-slate-500 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none">
+        <button type="button" class="mt-1 -ms-1 p-1 inline-flex items-center gap-x-2 text-xs rounded-lg border border-transparent text-slate-500 hover:bg-slate-100 disabled:opacity-50 disabled:pointer-events-none">
           <img class="flex-shrink-0 w-4 h-4 rounded-full" src="<%= gravitar_url(post.author) %>" alt="<%= User.first.email %>">
           <%= post.author.email %>
         </button>
