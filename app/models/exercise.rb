@@ -1,4 +1,6 @@
 class Exercise < ApplicationRecord
+  TYPESENSE_COLLECTION_NAME = "#{Rails.env}_exercises"
+  
   def import_to_typesense!
     self.class.typesense_collection.documents.create(
       {id: id.to_s}.merge(
@@ -9,7 +11,7 @@ class Exercise < ApplicationRecord
 
   def self.create_typesense_schema!
     schema = {
-      name: "exercises",
+      name: TYPESENSE_COLLECTION_NAME,
       fields: [
         {name: "title", type: "string"},
         {name: "description", type: "string"},
@@ -30,6 +32,6 @@ class Exercise < ApplicationRecord
   end
 
   def self.typesense_collection
-    TypesenseClientManager.client.collections["exercises"]
+    TypesenseClientManager.client.collections[TYPESENSE_COLLECTION_NAME]
   end
 end

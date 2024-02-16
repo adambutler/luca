@@ -24,7 +24,7 @@ class ActivitiesController < ApplicationController
         sort_by: "ranking:desc"
       }
 
-      @results = TypesenseClientManager.client.collections["exercises"].documents.search(search_parameters)
+      @results = Exercise.typesense_collection.documents.search(search_parameters)
     end
   end
 

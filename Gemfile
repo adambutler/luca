@@ -60,6 +60,12 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
   gem "awesome_print", require: false
   gem "pry"
+  gem "debug"
+  gem "rspec-rails"
+  gem "capybara"
+  gem "capybara_test_helpers"
+  gem "capybara-playwright-driver"
+  gem "database_cleaner"
 end
 
 group :development do

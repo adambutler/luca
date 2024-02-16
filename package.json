@@ -1,0 +1,10 @@
+{
+  "name": "luca",
+  "version": "0.1.0",
+  "repository": "git@github.com:adambutler/luca.git",
+  "author": "Adam Butler <adam@labfoo.dev>",
+  "private": true,
+  "devDependencies": {
+    "playwright": "^1.41.2"
+  }
+}
