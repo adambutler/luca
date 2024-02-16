@@ -2,5 +2,9 @@
   <h1 class="font-bold text-4xl mb-5">New activity</h1>
 
   <%= render "search" %>
-  <%= render "results", results: @results, workout: @workout, activity: @activity %>
+  <%= render "results", results: @results, exercises: @exercises, workout: @workout, activity: @activity %>
+
+  <% unless @results %>
+    <%= render "suggestions", suggestions: @suggestions, workout: @workout, activity: @activity %>
+  <% end %>
 </div>

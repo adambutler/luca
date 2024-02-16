@@ -2,7 +2,7 @@ class Workout < ApplicationRecord
   belongs_to :user
   has_many :activities, dependent: :destroy
 
-  default_scope { order(:created_at) }
+  default_scope { order(:scheduled_at) }
   scope :future, -> { where("scheduled_at >= ?", Time.zone.now) }
 
   broadcasts_refreshes

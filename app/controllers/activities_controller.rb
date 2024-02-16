@@ -25,6 +25,9 @@ class ActivitiesController < ApplicationController
       }
 
       @results = Exercise.typesense_collection.documents.search(search_parameters)
+      @exercises = Exercise.where(id: @results["hits"].map { |hit| hit["document"]["id"] })
+    else
+      @suggestions = Exercise.suggested_exercises(@workout.user)
     end
   end
 
