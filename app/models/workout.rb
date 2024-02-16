@@ -17,4 +17,12 @@ class Workout < ApplicationRecord
 
     primary
   end
+
+  def next_workout
+    user.workouts.where("scheduled_at > ?", scheduled_at).first
+  end
+  
+  def previous_workout
+    user.workouts.where("scheduled_at < ?", scheduled_at).last
+  end
 end

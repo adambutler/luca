@@ -1,5 +1,30 @@
-<% content_for(:heading_text) { @workout.scheduled_at.to_formatted_s(:short) } %>
-<% content_for(:heading_class) { "max-w-screen-md" } %>
+<% content_for(:heading_text) { nil } %>
+
+<% content_for(:heading) do %>
+  <div class="container mx-auto my-5 flex items-center">
+    <% if previous_workout_link(@workout) %>
+      <%= link_to previous_workout_link(@workout), class: "p-5" do %>
+        <%= render IconComponent.new(icon: :step, size: "4xl", color: :slate, css_classes: "scale-x-[-1]") %>
+      <% end %>
+    <% else %>
+      <%= content_tag :span, class: "p-5" do %>
+        <%= render IconComponent.new(icon: :step, size: "4xl", color: :slate, css_classes: "scale-x-[-1] opacity-30") %>
+      <% end %>
+    <% end %>
+    <div class="flex-grow text-center">
+      <%= polaris_text(variant: :heading3xl, as: :h1) { @workout.scheduled_at.to_formatted_s(:short) } %>
+    </div>
+    <% if next_workout_link(@workout) %>
+      <%= link_to next_workout_link(@workout), class: "p-5" do %>
+        <%= render IconComponent.new(icon: :step, size: "4xl", color: :slate) %>
+      <% end %>
+    <% else %>
+      <%= content_tag :span, class: "p-5" do %>
+        <%= render IconComponent.new(icon: :step, size: "4xl", color: :slate, css_classes: "opacity-30") %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
 
 <%= turbo_stream_from @workout %>
 
