@@ -1,0 +1,28 @@
+<%= form_with(model: [user, exercise], class: "contents") do |form| %>
+  <% if exercise.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(exercise.errors.count, "error") %> prohibited this exercise from being saved:</h2>
+
+      <ul>
+        <% exercise.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if params[:user] %>
+    <%= form.text_field :user_id, value: params[:user] %>
+  <% end %>
+
+  <%= render InputComponent.new(form: form, field: :title) %>
+  <%= render InputComponent.new(form: form, field: :description, type: :textarea) %>
+  <%= render InputComponent.new(form: form, field: :exercise_type, type: :select, collection: ExerciseConfig.types) %>
+  <%= render InputComponent.new(form: form, field: :body_part, type: :select, collection: ExerciseConfig.body_parts) %>
+  <%= render InputComponent.new(form: form, field: :level, type: :select, collection: ExerciseConfig.levels) %>
+  <%= render InputComponent.new(form: form, field: :equipment, type: :select, collection: ExerciseConfig.equipment) %>
+
+  <div class="inline">
+    <%= render(ButtonComponent.new(type: :primary, full_width: true)) { "Add Exercise" } %>
+  </div>
+<% end %>

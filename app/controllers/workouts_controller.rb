@@ -8,6 +8,7 @@ class WorkoutsController < ApplicationController
 
   # GET /workouts/1
   def show
+    session[:last_visited_workout] = @workout.id
   end
 
   # GET /workouts/new

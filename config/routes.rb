@@ -3,13 +3,16 @@ Rails.application.routes.draw do
   
   devise_for :users
   
-  resources :users, only: [:show]
+  resources :users, only: [:show] do
+    resources :exercises, only: [:new, :create], controller: "user/exercises"
+  end
+  
   resources :posts, only: [:create, :update]
 
   resources :workouts do
     resources :activities, shallow: true do
       post :search, on: :collection
-
+        
       resources :activity_sets, as: "set", path: "sets", shallow: true do
         put :toggle_warmup, on: :member
       end
