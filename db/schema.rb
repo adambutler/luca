@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_02_161705) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_16_160518) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,6 +52,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_02_161705) do
     t.float "ranking", default: 0.0, null: false
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_exercises_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -86,6 +88,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_02_161705) do
   add_foreign_key "activity_sets", "activities", name: "activity_sets_activity_id_fkey"
   add_foreign_key "client_memberships", "users", column: "client_id", name: "client_memberships_client_id_fkey"
   add_foreign_key "client_memberships", "users", column: "trainer_id", name: "client_memberships_trainer_id_fkey"
+  add_foreign_key "exercises", "users"
   add_foreign_key "posts", "users", column: "author_id", name: "posts_author_id_fkey"
   add_foreign_key "workouts", "users", name: "workouts_user_id_fkey"
 end

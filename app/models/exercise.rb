@@ -3,6 +3,8 @@ class Exercise < ApplicationRecord
 
   TYPESENSE_COLLECTION_NAME = "#{Rails.env}_exercises"
 
+  belongs_to :user, optional: true
+  
   def self.suggested_exercises(user)
     Exercise.joins(activities: :workout)
       .where("workouts.user_id = ?", user.id)
