@@ -6,12 +6,12 @@ RSpec.configure do |config|
     puts "Exercise count: #{Exercise.count}"
     
     begin
-      Exercise.destroy_typesense_schema!
+      Search::Exercise.destroy_typesense_schema!
     rescue Typesense::Error::ObjectNotFound
       puts "No typesense schema to destroy"
     end
 
-    Exercise.create_typesense_schema!
+    Search::Exercise.create_typesense_schema!
     CSV.foreach(Rails.root.join("config", "fixtures", "exercises_test.csv"), headers: true) do |row|
       exercise = Exercise.create!(row.to_h)
       exercise.import_to_typesense!

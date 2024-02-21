@@ -21,8 +21,9 @@ class ActivitySetsController < ApplicationController
 
   # POST /activity_sets
   def create
-    @activity_set = ActivitySet.new(activity_set_params)
+    @activity_set = ActivitySet.new
     @activity_set.activity_id = params[:activity_id]
+    @activity_set.copy_values_from_previous_set
     
     if @activity_set.save!
       redirect_to workout_path(@activity_set.activity.workout, activity: @activity_set.activity.id), notice: "Activity set was successfully created."

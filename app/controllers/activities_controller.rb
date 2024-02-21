@@ -31,17 +31,11 @@ class ActivitiesController < ApplicationController
 
   # POST /activities
   def create
-    @activity = Activity.new(activity_params)
-    @activity.workout = @workout
-    @activity_set = @activity.sets.build
-
-    ActiveRecord::Base.transaction do
-      @activity.save!
-      @activity_set.save!
-      redirect_to workout_path(@workout, activity: @activity), notice: "Activity was successfully created."
-    end
-  rescue ActiveRecord::RecordInvalid
-    render :new, status: :unprocessable_entity
+    @activity = ActivityBuilder.new(
+      workout: @workout, exercise: Exercise.find(activity_params[:exercise_id])
+    ).build!
+    
+    redirect_to workout_path(@workout, activity: @activity), notice: "Activity was successfully created."
   end
 
   # PATCH/PUT /activities/1

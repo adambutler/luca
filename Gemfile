@@ -50,6 +50,8 @@ gem "lookbook", ">= 2.2.0"
 gem "view_component"
 gem "active_attr"
 gem "globalid"
+gem "factory_bot_rails"
+gem "faker"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"

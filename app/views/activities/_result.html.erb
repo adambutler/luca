@@ -1,12 +1,12 @@
 <li>
   <%= form_with model: [workout, activity], data: {"turbo-frame": "_top"}  do |form| %>
-    <%= form.button class: "flex justify-between gap-x-6 p-5 text-left border-2 border-slate-900 hover:border-blue-500 rounded" do %>
+    <%= form.button class: "p-5 text-left border-2 border-slate-900 hover:border-blue-500 rounded w-full" do %>
       <%= form.hidden_field :exercise_id, value: exercise.id %>
-      <div class="flex min-w-0 gap-x-4">
+      <div class="flex gap-x-4">
         <div class="w-6 mt-1">
           <%= render IconComponent.new(icon: :fitness_center , size: :xl, color: :slate) %>
         </div>
-        <div class="min-w-0 flex-auto">
+        <div class="grow">
           <p class="text-sm font-semibold leading-6 text-slate-300">
             <% if defined?(hit) %>
               <%= raw hit["highlights"][0]["snippet"] %>
@@ -16,13 +16,10 @@
           </p>
           <p class="mt-1 text-xs leading-5 text-slate-500"><%= exercise.description %></p>
         </div>
-      </div>
-      <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-        <p class="text-sm leading-6 text-slate-900">
-          <%= render(BadgeComponent.new(color: :yellow)) { exercise.level } %>
-          &nbsp;
-          <%= render(BadgeComponent.new(color: :yellow)) { exercise.exercise_type } %>
-        </p>
+        <ul class="text-right flex flex-col gap-1">
+          <li><%= render(BadgeComponent.new(color: :yellow)) { exercise.level } %></li>
+          <li><%= render(BadgeComponent.new(color: :yellow)) { exercise.exercise_type } %></li>
+        </ul>
       </div>
     <% end %>
   <% end %>

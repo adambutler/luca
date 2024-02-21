@@ -31,7 +31,7 @@ module Search
     end
 
     def self.import!(exercise)
-      self.class.typesense_collection.documents.create(
+      typesense_collection.documents.create(
         {
           id: exercise.id.to_s,
           owner: exercise.user ? exercise.user.to_global_id.to_s : nil,

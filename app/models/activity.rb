@@ -15,4 +15,13 @@ class Activity < ApplicationRecord
   def display_title
     exercise.title
   end
+
+  def previous
+    @previous ||= Activity
+      .joins(:workout)
+      .where(exercise: exercise, workout: { user: workout.user })
+      .where("workout.scheduled_at < ?", workout.scheduled_at)
+      .order("workout.scheduled_at ASC")
+      .last
+  end
 end

@@ -9,80 +9,18 @@ else
   end
 end
 
-user = User.create!(email: "adam@labfoo.dev", password: "Password1!")
-
-workouts = [
-  Workout.create!(user: user, scheduled_at: Time.parse("2024-01-15 14:00")),
-  Workout.create!(user: user, scheduled_at: Time.parse("2024-01-18 18:00")),
-  Workout.create!(user: user, scheduled_at: Time.parse("2024-01-19 14:30")),
-  Workout.create!(user: user, scheduled_at: Time.parse("2024-01-22 14:00")),
-  Workout.create!(user: user, scheduled_at: Time.parse("2024-01-26 18:00"))
-]
-
-workout = workouts.first
+user = FactoryBot.create(:user, email: "adam@labfoo.dev")
+workouts = FactoryBot.create_list(:workout, 2, user: user)
+first_workout = workouts.first
 
 exercise = Exercise.find_by!(title: "Romanian Deadlift")
-activity = workout.activities.create!(workout: workout, exercise: exercise)
-
-activity.sets.create!({
-  load_goal: 20,
-  repetitions_goal: 4..6,
-  repetitions_type: "range",
-  warmup: true
-})
-
-activity.sets.create!({
-  load_goal: 40,
-  repetitions_goal: 8..10,
-  repetitions_type: "range",
-  warmup: false
-})
-
-activity.sets.create!({
-  load_goal: 45,
-  repetitions_goal: 8..10,
-  repetitions_type: "range",
-  warmup: false
-})
-
-activity.sets.create!({
-  load_goal: 45,
-  repetitions_goal: 8..10,
-  repetitions_type: "range",
-  warmup: false
-})
+activity = FactoryBot.create(:activity, :good, workout: first_workout, exercise: exercise)
+FactoryBot.create_list(:activity_set, 3, :complete, activity: activity)
 
 exercise = Exercise.find_by!(title: "Barbell Squat")
-activity = workout.activities.create!(workout: workout, exercise: exercise)
+activity = FactoryBot.create(:activity, :good, workout: first_workout, exercise: exercise)
+FactoryBot.create_list(:activity_set, 3, :complete, activity: activity)
 
-activity.sets.create!({
-  load_goal: 20,
-  repetitions_goal: 4..6,
-  repetitions_type: "range",
-  warmup: true
-})
-
-activity.sets.create!({
-  load_goal: 50,
-  repetitions_goal: 7..7,
-  repetitions_type: "limit",
-  warmup: false
-})
-
-activity.sets.create!({
-  load_goal: 55,
-  repetitions_goal: 7..7,
-  repetitions_type: "limit",
-  warmup: false
-})
-
-activity.sets.create!({
-  load_goal: 55,
-  repetitions_goal: 7..7,
-  repetitions_type: "limit",
-  warmup: false
-})
-
-Exercise.destroy_typesense_schema!
-Exercise.create_typesense_schema!
-Exercise.all.each { |exercise| exercise.import_to_typesense! }
+Search::Exercise.destroy_typesense_schema!
+Search::Exercise.create_typesense_schema!
+Exercise.all.each(&:import_to_typesense!)

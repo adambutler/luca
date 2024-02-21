@@ -2,10 +2,10 @@ class ActivitySet < ApplicationRecord
   belongs_to :activity, touch: true
 
   default_scope { order(:created_at) }
-  scope :warmup, -> { where(warmup: true) }
   
-  after_initialize :setup_default_values
-
+  scope :warmup, -> { where(warmup: true) }
+  scope :ordinary, -> { where(warmup: false) }
+  
   def set_number
     sibilings.where(warmup: false).where("id < ?", id).count
       .then { |set_number| split? ? set_number / 2 : set_number }
@@ -56,16 +56,34 @@ class ActivitySet < ApplicationRecord
     end
   end
 
-  private
+  def set_index
+    sibilings.find_index(self)
+  end
 
-  def setup_default_values
-    return if persisted?
-    return unless activity
+  def placeholder(attribute)
+    return nil unless activity.previous
 
+    previous_set = activity.previous.sets[set_index]
+
+    # Handle the inex offset where the previous activity has a warmup
+    # but the current activity does not.
+    if activity.previous.has_warmup? && !activity.has_warmup?
+      previous_set = activity.previous.sets[set_index + 1]
+    end
+    
+    return nil unless previous_set
+
+    value = previous_set.send(attribute)
+    value = value.respond_to?(:prettify) ? value.prettify : value
+
+    value ? "⟲ #{value}" : "-"
+  end
+
+  def copy_values_from_previous_set
     self.load_goal ||= sibilings.last&.load_goal || 20
-    self.load_actual ||= sibilings.last&.load_actual || 20
+    self.load_actual ||= sibilings.last&.load_actual || nil
     self.repetitions_goal ||= (sibilings.last&.repetitions_goal || (8..10))
-    self.repetitions_actual ||= (sibilings.last&.repetitions_actual || (8..10))
+    self.repetitions_actual ||= (sibilings.last&.repetitions_actual || nil)
     self.repetitions_type ||= (sibilings.last&.repetitions_type || "range")
     self.warmup ||= sibilings.empty?
   end
