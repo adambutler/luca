@@ -18,13 +18,7 @@ class ActivitiesController < ApplicationController
     @activity = Activity.new
 
     if params[:query]
-      search_parameters = {
-        q: params[:query],
-        query_by: "title",
-        sort_by: "ranking:desc"
-      }
-
-      @results = Exercise.typesense_collection.documents.search(search_parameters)
+      @results = Search::Exercise.search(user: @workout.user, query: params[:query])
       @exercises = Exercise.where(id: @results["hits"].map { |hit| hit["document"]["id"] })
     else
       @suggestions = Exercise.suggested_exercises(@workout.user)

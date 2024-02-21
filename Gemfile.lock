@@ -414,6 +414,7 @@ DEPENDENCIES
   database_cleaner
   debug
   devise
+  globalid
   importmap-rails
   listen
   lookbook (>= 2.2.0)
