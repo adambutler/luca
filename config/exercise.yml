@@ -1,0 +1,53 @@
+default: &default
+  types:
+    - Strength
+    - Plyometrics
+    - Stretching
+    - Powerlifting
+    - Strongman
+    - Cardio
+    - Olympic Weightlifting
+  body_parts:
+    - Abdominals
+    - Biceps
+    - Abductors
+    - Adductors
+    - Glutes
+    - Quadriceps
+    - Calves
+    - Chest
+    - Forearms
+    - Hamstrings
+    - Lats
+    - Shoulders
+    - Triceps
+    - Lower Back
+    - Middle Back
+    - Traps
+  levels:
+    - Beginner
+    - Intermediate
+    - Expert
+  equipment:
+    - None
+    - Bands
+    - Barbell
+    - Kettlebells
+    - Dumbbell  
+    - Other
+    - Body Only
+    - Cable
+    - Machine
+    - Medicine Ball
+    - Exercise Ball
+    - Foam Roll
+    - E-Z Curl Bar
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
