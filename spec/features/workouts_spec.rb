@@ -28,7 +28,7 @@ describe "workouts", type: :feature do
     context "given an activity" do
       let!(:activity) { Activity.create(workout: workout, exercise: Exercise.find_by_title("Romanian Deadlift")) }
 
-      it "allows me to add an activity to the workout" do
+      it "allows me to add a set to the workout" do
         visit "/workouts/#{workout.id}"
         expect(page).to have_content "Romanian Deadlift"
         click_link "Romanian Deadlift"
@@ -39,6 +39,14 @@ describe "workouts", type: :feature do
         expect(find_field("activity_set[repetitions_goal]").value).to eq "8-10"
         expect(find_field("activity_set[repetitions_goal]").value).to eq "8-10"
         expect(find_field("activity_set[repetitions_actual]").value).to eq ""
+
+        fill_in "activity_set[load_actual]", with: "25"
+        fill_in "activity_set[repetitions_actual]", with: "12"
+
+        click_button "Add Set"
+
+        expect(find(:xpath, "(//turbo-frame[@data-test-id='activity_card_frame'][1]//input[@data-test-id='activity_card_set_load_actual_input'])[2]").value).to eq "25"
+        expect(find(:xpath, "(//turbo-frame[@data-test-id='activity_card_frame'][1]//input[@data-test-id='activity_card_set_repetitions_actual_input'])[2]").value).to eq "12"
       end
     end
   end
