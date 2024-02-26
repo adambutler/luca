@@ -124,12 +124,6 @@
           <% end %>
         
           <%= form_with(model: activity.sets.build, url: activity_set_index_path(activity), class: "mt-5") do |form| %>
-            <%= form.hidden_field :load_goal %>
-            <%= form.hidden_field :load_actual %>
-            <%= form.hidden_field :repetitions_goal %>
-            <%= form.hidden_field :repetitions_actual %>
-            <%= form.hidden_field :warmup %>
-            <%= form.hidden_field :repetitions_type %>
             <%= render(ButtonComponent.new(type: :primary, full_width: true, submit: true)) { "Add Set" } %>
           <% end %>
         <% end %>
