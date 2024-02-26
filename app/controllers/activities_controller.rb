@@ -21,7 +21,7 @@ class ActivitiesController < ApplicationController
       @results = Search::Exercise.search(user: @workout.user, query: params[:query])
       @exercises = Exercise.where(id: @results["hits"].map { |hit| hit["document"]["id"] })
     else
-      @suggestions = Exercise.suggested_exercises(@workout.user)
+      @suggestions = Exercise.suggested_exercises(workout: @workout)
     end
   end
 
