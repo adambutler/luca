@@ -68,6 +68,7 @@ group :development, :test do
   gem "capybara_test_helpers"
   gem "capybara-playwright-driver"
   gem "database_cleaner"
+  gem "timecop"
 end
 
 group :development do

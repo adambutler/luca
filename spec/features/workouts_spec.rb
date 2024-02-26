@@ -1,6 +1,8 @@
 require "rails_helper"
 
 describe "workouts", type: :feature do
+  include CapybaraHelper
+
   let(:user) { User.create(email: 'user@example.com', password: 'password') }
   
   before :each do
@@ -44,9 +46,18 @@ describe "workouts", type: :feature do
         fill_in "activity_set[repetitions_actual]", with: "12"
 
         click_button "Add Set"
+        
+        expect(find_set_field(activity_index: 1, set_index: 2, field: "load_actual").value).to eq "25"
+        expect(find_set_field(activity_index: 1, set_index: 2, field: "repetitions_actual").value).to eq "12"
+        
+        click_button "Add Set"
 
-        expect(find(:xpath, "(//turbo-frame[@data-test-id='activity_card_frame'][1]//input[@data-test-id='activity_card_set_load_actual_input'])[2]").value).to eq "25"
-        expect(find(:xpath, "(//turbo-frame[@data-test-id='activity_card_frame'][1]//input[@data-test-id='activity_card_set_repetitions_actual_input'])[2]").value).to eq "12"
+        find_set_field(activity_index: 1, set_index: 3, field: "load_goal").fill_in(with: "31")
+        blur
+        
+        find_set_copy_link(activity_index: 1, set_index: 3, button: "load").click
+        sleep 0.1
+        expect(find_set_field(activity_index: 1, set_index: 3, field: "load_actual").value).to eq "31"
       end
     end
   end

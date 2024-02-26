@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       post :search, on: :collection
         
       resources :activity_sets, as: "set", path: "sets", shallow: true do
+        put :copy_load_from_goal, on: :member
         put :toggle_warmup, on: :member
       end
     end

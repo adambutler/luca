@@ -1,5 +1,5 @@
 class ActivitySetsController < ApplicationController
-  before_action :set_activity_set, only: %i[show edit update destroy toggle_warmup]
+  before_action :set_activity_set, only: %i[show edit update destroy toggle_warmup copy_load_from_goal]
 
   # GET /activity_sets
   def index
@@ -55,6 +55,11 @@ class ActivitySetsController < ApplicationController
       @activity_set.update(warmup: true)
     end
 
+    redirect_to workout_path(@activity_set.activity.workout, activity: @activity_set.activity.id), notice: "Activity set was successfully updated.", status: :see_other
+  end
+
+  def copy_load_from_goal
+    @activity_set.update(load_actual: @activity_set.load_goal)
     redirect_to workout_path(@activity_set.activity.workout, activity: @activity_set.activity.id), notice: "Activity set was successfully updated.", status: :see_other
   end
 
