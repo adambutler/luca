@@ -20,7 +20,7 @@ describe "workouts", type: :feature do
     it "allows me to add an activity to the workout" do
       visit "/workouts/#{workout.id}"
       click_link "Add Activity"
-      fill_in "Search", with: "Romanian Deadlift"
+      fill_in "Search exercises", with: "Romanian Deadlift"
       first("ul li button[type=submit]").click
       expect(page).to have_content "Activity was successfully created"
     end
@@ -35,7 +35,7 @@ describe "workouts", type: :feature do
         click_button "Add Set"
         expect(page).to have_content "W"
         expect(find_field("activity_set[load_goal]").value).to eq "20"
-        expect(find_field("activity_set[load_actual]").value).to eq "20"
+        expect(find_field("activity_set[load_actual]").value).to eq ""
         expect(find_field("activity_set[repetitions_goal]").value).to eq "8-10"
         expect(find_field("activity_set[repetitions_goal]").value).to eq "8-10"
         expect(find_field("activity_set[repetitions_actual]").value).to eq ""

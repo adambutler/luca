@@ -1,7 +1,7 @@
 <% content_for(:heading_text) { nil } %>
 
 <% content_for(:heading) do %>
-  <div class="container mx-auto my-5 flex items-center">
+  <div class="container mx-auto my-5 flex items-center max-w-screen-md">
     <% if previous_workout_link(@workout) %>
       <%= link_to previous_workout_link(@workout), class: "p-5" do %>
         <%= render IconComponent.new(icon: :step, size: "4xl", color: :slate, css_classes: "scale-x-[-1]") %>
