@@ -10,6 +10,10 @@ else
 end
 
 user = FactoryBot.create(:user, email: "adam@labfoo.dev")
+trainer = FactoryBot.create(:user, email: "luca@labfoo.dev")
+
+ClientMembership.create!(client: user, trainer: trainer)
+
 workouts = FactoryBot.create_list(:workout, 2, user: user)
 first_workout = workouts.first
 

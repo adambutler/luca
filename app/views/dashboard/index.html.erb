@@ -1,15 +1,18 @@
 <% content_for(:heading_text) { greet } %>
 
-<% if @clients.any? %>
-  <% @clients.each do |client| %>
-    <%= render "users/profile_card", user: client %>
+<div class="py-5">
+  <% if @clients.any? %>
+    <h2 class="text-2xl font-semibold text-center mb-20">Your Clients</h2>
+    <% @clients.each do |client| %>
+      <%= render "users/profile_card", user: client %>
+    <% end %>
   <% end %>
-<% end %>
 
-<div class="container mx-auto">
-  <%= render "workouts/carousel", workouts: @workouts, user: @user %>
+  <div class="container mx-auto">
+    <%= render "workouts/carousel", workouts: @workouts, user: @user %>
 
-  <%= link_to new_workout_path do %>
-    <%= render(ButtonComponent.new(type: :primary, full_width: true)) { "Add Workout" } %>
-  <% end %>
+    <%= link_to new_workout_path, class: "mb-5" do %>
+      <%= render(ButtonComponent.new(type: :primary, full_width: true)) { "Add Personal Workout" } %>
+    <% end %>
+  </div>
 </div>

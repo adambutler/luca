@@ -41,12 +41,19 @@ describe "workouts", type: :feature do
         expect(find_field("activity_set[repetitions_goal]").value).to eq "8-10"
         expect(find_field("activity_set[repetitions_goal]").value).to eq "8-10"
         expect(find_field("activity_set[repetitions_actual]").value).to eq ""
-
-        fill_in "activity_set[load_actual]", with: "25"
-        fill_in "activity_set[repetitions_actual]", with: "12"
+        await_async
+        find_set_field(activity_index: 1, set_index: 1, field: "repetitions_actual").fill_in(with: "12")
+        await_async
+        find_set_field(activity_index: 1, set_index: 1, field: "load_actual").fill_in(with: "25")
+        expect(find_field("activity_set[load_actual]").value).to eq "25"
+        expect(find_field("activity_set[repetitions_actual]").value).to eq "12"
 
         click_button "Add Set"
-        
+
+        if find_set_field(activity_index: 1, set_index: 2, field: "repetitions_actual").value == ""
+          binding.pry
+        end
+
         expect(find_set_field(activity_index: 1, set_index: 2, field: "load_actual").value).to eq "25"
         expect(find_set_field(activity_index: 1, set_index: 2, field: "repetitions_actual").value).to eq "12"
         
@@ -56,7 +63,7 @@ describe "workouts", type: :feature do
         blur
         
         find_set_copy_link(activity_index: 1, set_index: 3, button: "load").click
-        sleep 0.1
+        await_async
         expect(find_set_field(activity_index: 1, set_index: 3, field: "load_actual").value).to eq "31"
       end
     end
