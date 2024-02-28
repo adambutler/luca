@@ -17,10 +17,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_16_160518) do
   create_table "activities", force: :cascade do |t|
     t.bigint "workout_id", null: false
     t.bigint "exercise_id", null: false
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "emoji", default: 0, null: false
     t.boolean "split", default: false, null: false
+    t.index ["emoji"], name: "index_activities_on_emoji"
+    t.index ["exercise_id"], name: "index_activities_on_exercise_id"
+    t.index ["workout_id"], name: "index_activities_on_workout_id"
   end
 
   create_table "activity_sets", force: :cascade do |t|
@@ -31,15 +34,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_16_160518) do
     t.string "repetitions_actual"
     t.string "repetitions_type", null: false
     t.boolean "warmup", default: false, null: false
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_id"], name: "index_activity_sets_on_activity_id"
   end
 
   create_table "client_memberships", force: :cascade do |t|
     t.bigint "client_id", null: false
     t.bigint "trainer_id", null: false
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_client_memberships_on_client_id"
+    t.index ["trainer_id"], name: "index_client_memberships_on_trainer_id"
   end
 
   create_table "exercises", force: :cascade do |t|
@@ -50,9 +56,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_16_160518) do
     t.string "equipment", null: false
     t.string "level", null: false
     t.float "ranking", default: 0.0, null: false
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.index ["body_part"], name: "index_exercises_on_body_part"
+    t.index ["equipment"], name: "index_exercises_on_equipment"
+    t.index ["exercise_type"], name: "index_exercises_on_exercise_type"
+    t.index ["level"], name: "index_exercises_on_level"
+    t.index ["title"], name: "index_exercises_on_title", unique: true
     t.index ["user_id"], name: "index_exercises_on_user_id"
   end
 
@@ -61,34 +72,40 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_16_160518) do
     t.text "body", null: false
     t.string "subject_type", null: false
     t.bigint "subject_id", null: false
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "author_id", null: false
+    t.index ["author_id"], name: "index_posts_on_author_id"
+    t.index ["subject_type", "subject_id"], name: "index_posts_on_subject"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at", precision: nil
-    t.datetime "remember_created_at", precision: nil
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   create_table "workouts", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.datetime "scheduled_at", precision: nil, null: false
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "scheduled_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["scheduled_at"], name: "index_workouts_on_scheduled_at"
+    t.index ["user_id"], name: "index_workouts_on_user_id"
   end
 
-  add_foreign_key "activities", "exercises", name: "activities_exercise_id_fkey"
-  add_foreign_key "activities", "workouts", name: "activities_workout_id_fkey"
-  add_foreign_key "activity_sets", "activities", name: "activity_sets_activity_id_fkey"
-  add_foreign_key "client_memberships", "users", column: "client_id", name: "client_memberships_client_id_fkey"
-  add_foreign_key "client_memberships", "users", column: "trainer_id", name: "client_memberships_trainer_id_fkey"
+  add_foreign_key "activities", "exercises"
+  add_foreign_key "activities", "workouts"
+  add_foreign_key "activity_sets", "activities"
+  add_foreign_key "client_memberships", "users", column: "client_id"
+  add_foreign_key "client_memberships", "users", column: "trainer_id"
   add_foreign_key "exercises", "users"
-  add_foreign_key "posts", "users", column: "author_id", name: "posts_author_id_fkey"
-  add_foreign_key "workouts", "users", name: "workouts_user_id_fkey"
+  add_foreign_key "posts", "users", column: "author_id"
+  add_foreign_key "workouts", "users"
 end
