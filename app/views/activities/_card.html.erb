@@ -23,7 +23,7 @@
             <div class="flex items-center mb-2">
               <p class="font-bold"><%= activity.exercise.title %></p>
             </div>
-            <p class="text-xs text-slate-500"><%= activity.exercise.description.truncate(params[:activity] == activity.id.to_s ? Float::INFINITY : 150) %></p>
+            <p class="text-xs text-slate-400"><%= activity.exercise.description.truncate(params[:activity] == activity.id.to_s ? Float::INFINITY : 150) %></p>
           <% end %>
         </div>
 
@@ -71,7 +71,7 @@
                 <div class="flex justify-center items-center col-span-2">
                   <%= turbo_frame_tag(set, :load_goal_form) do %>
                     <%= form_with(model: set, url: set_path(set)) do |form| %>
-                      <%= form.number_field :load_goal, id: dom_id(set, :load_goal), value: set.load_goal&.prettify, step: "0.1", inputmode: "decimal", class: "w-full px-1 py-1 rounded bg-slate-800 border-slate-700 ring-emerald-500 border font-semibold text-sm", onchange: "this.form.requestSubmit()", data: {test_id: "activity_card_set_load_goal_input"} %>
+                      <%= form.number_field :load_goal, id: dom_id(set, :load_goal), value: set.load_goal&.prettify, step: "0.1", inputmode: "decimal", class: "w-full p-2 text-slate-300 rounded bg-slate-900 bg-opacity-50 border-[#282531] ring-emerald-500 border font-semibold text-sm", onchange: "this.form.requestSubmit()", data: {test_id: "activity_card_set_load_goal_input"} %>
                     <% end %>
                   <% end %>
                 </div>
@@ -83,14 +83,14 @@
                 <div class="flex justify-center items-center col-span-2">
                   <%= turbo_frame_tag(set, :load_actual_form) do %>
                     <%= form_with(model: set, url: set_path(set)) do |form| %>
-                      <%= form.number_field :load_actual, id: dom_id(set, :load_actual), value: set.load_actual&.prettify, step: "0.1", inputmode: "decimal", class: "w-full px-1 py-1 rounded bg-slate-800 border-slate-700 ring-emerald-500 border font-semibold text-sm", onchange: "this.form.requestSubmit()", placeholder: set.placeholder(:load_actual), data: {test_id: "activity_card_set_load_actual_input"} %>
+                      <%= form.number_field :load_actual, id: dom_id(set, :load_actual), value: set.load_actual&.prettify, step: "0.1", inputmode: "decimal", class: "w-full p-2 text-slate-300 rounded bg-slate-900 bg-opacity-50 border-[#282531] ring-emerald-500 border font-semibold text-sm", onchange: "this.form.requestSubmit()", placeholder: set.placeholder(:load_actual), data: {test_id: "activity_card_set_load_actual_input"} %>
                     <% end %>
                   <% end %>
                 </div>
                 <div class="flex justify-center items-center col-span-2">
                   <%= turbo_frame_tag(set, :repetitions_goal_form) do %>
                     <%= form_with(model: set, url: set_path(set)) do |form| %>
-                      <%= form.text_field :repetitions_goal, id: dom_id(set, :repetitions_goal), value: repetitions_goal_value(set), class: "w-full px-1 py-1 rounded bg-slate-800 border-slate-700 ring-emerald-500 border font-semibold text-sm", onchange: "this.form.requestSubmit()" %>
+                      <%= form.text_field :repetitions_goal, id: dom_id(set, :repetitions_goal), value: repetitions_goal_value(set), class: "w-full p-2 text-slate-300 rounded bg-slate-900 bg-opacity-50 border-[#282531] ring-emerald-500 border font-semibold text-sm", onchange: "this.form.requestSubmit()" %>
                     <% end %>
                   <% end %>
                 </div>
@@ -107,7 +107,7 @@
                 <div class="flex justify-center items-center col-span-2">
                   <%= turbo_frame_tag(set, :repetitions_actual_form) do %>
                     <%= form_with(model: set, url: set_path(set)) do |form| %>
-                      <%= form.number_field :repetitions_actual, id: dom_id(set, :repetitions_actual), value: set.repetitions_actual, inputmode: "numeric", class: "w-full px-1 py-1 rounded bg-slate-800 border-slate-700 ring-emerald-500 border font-semibold text-sm", onchange: "this.form.requestSubmit()", placeholder: set.placeholder(:repetitions_actual), data: {test_id: "activity_card_set_repetitions_actual_input"} %>
+                      <%= form.number_field :repetitions_actual, id: dom_id(set, :repetitions_actual), value: set.repetitions_actual, inputmode: "numeric", class: "w-full p-2 text-slate-300 rounded bg-slate-900 bg-opacity-50 border-[#282531] ring-emerald-500 border font-semibold text-sm", onchange: "this.form.requestSubmit()", placeholder: set.placeholder(:repetitions_actual), data: {test_id: "activity_card_set_repetitions_actual_input"} %>
                     <% end %>
                   <% end %>
                 </div>

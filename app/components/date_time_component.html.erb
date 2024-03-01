@@ -1,0 +1,17 @@
+<div class="glam p-[2px] text-[0.7em] bg-white text-black font-bold rounded-lg overflow-hidden flex text-center">
+  <div class="text-red-50 py-2 px-5 uppercase font-extrabold flex items-center">
+    <div class="flex-col">
+      <span class="block drop-shadow"><%= datetime.strftime("%A") %></span>
+      <span class="text-white text-4xl block drop-shadow"><%= datetime.strftime("%e") %></span>
+      <span class="block drop-shadow"><%= datetime.strftime("%B %Y") %></span>
+    </div>
+  </div>
+  <div class="p-5 flex items-center px-10 bg-white rounded-r-[.4rem]">
+    <div class="flex-col">
+      <span class="text-3xl mt-2 font-bold flex items-center gap-1">
+        <%= datetime.strftime("%l%P") %>
+      </span>
+      <span class="block text-md italic text-gray-700">@ Luxe</span>
+    </div>
+  </div>
+</div>

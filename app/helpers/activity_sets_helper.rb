@@ -1,9 +1,10 @@
 module ActivitySetsHelper
   def repetitions_goal_value(set)
-    a = [set.repetitions_type == "limit" ? "@" : nil]
-    a << [set.repetitions_goal.min, set.repetitions_goal.max].uniq.join("-")
-
-    a.compact.join
+    case set.repetitions_type
+      when "range" then [set.repetitions_goal.min, set.repetitions_goal.max].uniq.join("-")
+      when "limit" then set.repetitions_goal.min
+      when "target" then set.repetitions_goal.min
+    end
   end
 
   def repetitions_actual_copy_value(set)

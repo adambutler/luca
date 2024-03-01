@@ -9,7 +9,7 @@ class ButtonComponent < ViewComponent::Base
 
   def color
     case type
-    when :primary then :blue
+    when :primary then "frost hover:bg-purple-800"
     when :secondary then :slate
     when :danger then :red
     end
@@ -17,13 +17,13 @@ class ButtonComponent < ViewComponent::Base
 
   def classes
     [
-      "bg-#{color}-500",
-      "hover:bg-#{color}-700",
+      color,
       "text-white",
       "font-bold",
       "py-2",
       "px-4",
-      "rounded"
+      "rounded",
+      "transition",
     ].tap do |classes|
       classes << "w-full" if full_width
     end.join(" ")

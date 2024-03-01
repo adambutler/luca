@@ -12,7 +12,9 @@
       <% end %>
     <% end %>
     <div class="flex-grow text-center">
-      <%= polaris_text(variant: :heading3xl, as: :h1) { @workout.scheduled_at.to_formatted_s(:short) } %>
+      <div class="inline-block">
+        <%= render DateTimeComponent.new(datetime: @workout.scheduled_at) %>
+      </div>
     </div>
     <% if next_workout_link(@workout) %>
       <%= link_to next_workout_link(@workout), class: "p-5" do %>

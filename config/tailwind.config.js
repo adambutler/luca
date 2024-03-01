@@ -32,10 +32,10 @@ module.exports = {
     },
     // Buttons
     {
-      pattern: /bg-(blue|slate|red)-(500)/,
+      pattern: /bg-(purple|blue|slate|red)-(600)/,
     },
     {
-      pattern: /bg-(blue|slate|red)-(700)/,
+      pattern: /bg-(purple|blue|slate|red)-(700)/,
       variants: ["hover"],
     },
   ],
