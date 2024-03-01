@@ -31,29 +31,9 @@ class ActivitySet < ApplicationRecord
   end
 
   def repetitions_goal=(value)
-    case value
-    when Range
-      super(value)
-    when String
-      if value.match?(/\@\d?$/)
-        int = value.match(/\@(\d)?$/)[1]
-        self.repetitions_type = "limit"
-        super(int..int)
-      else
-        match = value.match(/^(\d+)(\.{2,3}|-)(\d+)$/)
-        if match
-          self.repetitions_type = "range"
-          from = match[1].to_i
-          range_operator = match[2]
-          to = range_operator === "..." ? match[3].to_i - 1 : match[3].to_i
-          super(from..to)
-        else
-          raise ArgumentError, "Invalid value for repetitions_goal: #{value.inspect}"
-        end
-      end
-    else
-      raise ArgumentError, "Invalid value for repetitions_goal: #{value.inspect}"
-    end
+    rangeable = Rangeable.new(value)
+    super(rangeable.database_value)
+    self.repetitions_type = rangeable.type
   end
 
   def set_index

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_16_160518) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_01_105554) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -30,9 +30,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_16_160518) do
     t.bigint "activity_id", null: false
     t.float "load_goal", null: false
     t.float "load_actual"
-    t.int4range "repetitions_goal", null: false
+    t.int4range "repetitions_goal"
     t.string "repetitions_actual"
-    t.string "repetitions_type", null: false
+    t.string "repetitions_type"
     t.boolean "warmup", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
