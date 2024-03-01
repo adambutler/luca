@@ -23,10 +23,12 @@
       <section>
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <%= render "layouts/logo" %>
-          <div class="w-full bg-slate-900 rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
-            <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-              <%= yield %>
-            </div>
+          <div class="w-full md:mt-0 sm:max-w-md xl:p-0 mt-5">
+            <%= render CardComponent.new do %>
+              <div class="p-5 space-y-4">
+                <%= yield %>
+              </div>
+            <% end %>
           </div>
         </div>
       </section>

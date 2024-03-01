@@ -64,6 +64,6 @@ class InputComponent < ViewComponent::Base
   end
 
   def input_classes
-    "block w-full p-4 text-sm text-slate-400 border border-slate-800 rounded-lg bg-slate-900 focus:ring-blue-500 focus:border-blue-500"
+    "block w-full p-4 text-sm text-slate-300 border bg-opacity-50 border-[#282531] rounded-lg bg-slate-900 focus:ring-purple-800 focus:border-purple-800"
   end
 end
