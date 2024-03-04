@@ -1,28 +1,30 @@
 <% content_for(:heading_text) { nil } %>
 
 <% content_for(:heading) do %>
-  <div class="container mx-auto my-5 flex items-center max-w-screen-md">
-    <% if previous_workout_link(@workout) %>
-      <%= link_to previous_workout_link(@workout), class: "p-5" do %>
-        <%= render IconComponent.new(icon: :step, size: "4xl", color: :slate, css_classes: "scale-x-[-1]") %>
+  <%= render ContainerComponent.new do %>
+    <div class="flex items-center">
+      <% if previous_workout_link(@workout) %>
+        <%= link_to previous_workout_link(@workout), class: "p-5" do %>
+          <%= render IconComponent.new(icon: :step, size: "4xl", color: :slate, css_classes: "scale-x-[-1]") %>
+        <% end %>
+      <% else %>
+        <%= content_tag :span, class: "p-5" do %>
+          <%= render IconComponent.new(icon: :step, size: "4xl", color: :slate, css_classes: "scale-x-[-1] opacity-30") %>
+        <% end %>
       <% end %>
-    <% else %>
-      <%= content_tag :span, class: "p-5" do %>
-        <%= render IconComponent.new(icon: :step, size: "4xl", color: :slate, css_classes: "scale-x-[-1] opacity-30") %>
-      <% end %>
-    <% end %>
-    <div class="flex-grow text-center">
-      <div class="inline-block">
-        <%= render DateTimeComponent.new(datetime: @workout.scheduled_at) %>
+      <div class="flex-grow text-center">
+        <div class="inline-block">
+          <%= render DateTimeComponent.new(datetime: @workout.scheduled_at) %>
+        </div>
       </div>
-    </div>
-    <% if next_workout_link(@workout) %>
-      <%= link_to next_workout_link(@workout), class: "p-5" do %>
-        <%= render IconComponent.new(icon: :step, size: "4xl", color: :slate) %>
-      <% end %>
-    <% else %>
-      <%= content_tag :span, class: "p-5" do %>
-        <%= render IconComponent.new(icon: :step, size: "4xl", color: :slate, css_classes: "opacity-30") %>
+      <% if next_workout_link(@workout) %>
+        <%= link_to next_workout_link(@workout), class: "p-5" do %>
+          <%= render IconComponent.new(icon: :step, size: "4xl", color: :slate) %>
+        <% end %>
+      <% else %>
+        <%= content_tag :span, class: "p-5" do %>
+          <%= render IconComponent.new(icon: :step, size: "4xl", color: :slate, css_classes: "opacity-30") %>
+        <% end %>
       <% end %>
     <% end %>
   </div>
@@ -30,6 +32,6 @@
 
 <%= turbo_stream_from @workout %>
 
-<div class="container mx-auto max-w-screen-md">
+<%= render ContainerComponent.new do %>
   <%= render @workout %>
-</div>
+<% end %>

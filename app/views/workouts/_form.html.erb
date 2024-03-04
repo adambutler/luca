@@ -1,4 +1,4 @@
-<%= form_with(model: workout, class: "contents") do |form| %>
+<%= form_with(model: workout, class: "contents mt-10") do |form| %>
   <% if workout.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
       <h2><%= pluralize(workout.errors.count, "error") %> prohibited this workout from being saved:</h2>
@@ -15,12 +15,8 @@
     <%= form.text_field :user_id, value: params[:user] %>
   <% end %>
 
-  <div class="my-5">
-    <%= form.label :scheduled_at %>
-    <%= form.datetime_field :scheduled_at, class: "block w-full p-4 text-sm text-slate-400 border border-slate-800 rounded-lg bg-slate-900 focus:ring-blue-500 focus:border-blue-500" %>
-  </div>
+  <%= render InputComponent.new(form: form, field: :scheduled_at, type: :datetime) %>
+  <%= render InputComponent.new(form: form, field: :location, type: :text, datalist: ["Luxe", "GymSet"]) %>
 
-  <div class="inline">
-    <%= render(ButtonComponent.new(type: :primary, full_width: true)) { "Add Workout" } %>
-  </div>
+  <%= render(ButtonComponent.new(type: :primary, full_width: true)) { "Add Workout" } %>
 <% end %>

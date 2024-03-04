@@ -28,11 +28,11 @@
       <% end %>
       
       <% if content_for?(:heading_text) %>
-        <div class="container mx-auto my-5 <%= content_for(:heading_class) %>">
+        <%= render ContainerComponent.new do %>
           <%= polaris_text(variant: :heading4xl, as: :h1) do %>
             <%= yield :heading_text %>
           <% end %>
-        </div>
+        <% end %>
       <% end %>
       
       <%= yield %>

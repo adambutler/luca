@@ -1,5 +1,4 @@
-<div class="mx-auto md:w-2/3 w-full">
-  <h1 class="font-bold text-4xl">New workout</h1>
-
+<%= render ContainerComponent.new do %>
+  <%= render(HeadingComponent.h2) { "New Workout" } %>
   <%= render "form", workout: @workout %>
-</div>
+<% end %>

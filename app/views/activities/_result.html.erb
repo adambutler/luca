@@ -1,6 +1,6 @@
 <li>
   <%= form_with model: [workout, activity], data: {"turbo-frame": "_top"}  do |form| %>
-    <%= form.button class: "p-5 text-left border-2 border-slate-900 hover:border-blue-500 rounded w-full" do %>
+    <%= form.button class: "p-5 text-left rounded w-full hover:bg-purple-500 hover:bg-opacity-10" do %>
       <%= form.hidden_field :exercise_id, value: exercise.id %>
       <div class="flex gap-x-4">
         <div class="w-6 mt-1">

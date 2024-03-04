@@ -1,9 +1,11 @@
 <%= turbo_frame_tag :search_results do %>
   <% if results %>
-    <ul role="list" class="divide-y divide-slate-800 bg-slate-900 border border-slate-800 container mx-auto rounded">
-      <% results["hits"].each do |hit| %>
-        <%= render "result", workout: workout, activity: activity, hit: hit, exercise: exercises.find(hit["document"]["id"]) %>
-      <% end %>
-    </ul>
+    <%= render CardComponent.new(padded: false) do %>
+      <ul role="list" class="divide-slate-800">
+        <% results["hits"].each do |hit| %>
+          <%= render "result", workout: workout, activity: activity, hit: hit, exercise: exercises.find(hit["document"]["id"]) %>
+        <% end %>
+      </ul>
+    <% end %>
   <% end %>
 <% end %>

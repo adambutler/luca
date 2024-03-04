@@ -1,4 +1,4 @@
-<div class="mx-auto md:w-2/3 w-full">
+<%= render ContainerComponent.new do %>
   <h1 class="font-bold text-4xl mb-5">New activity</h1>
 
   <%= render "search" %>
@@ -12,4 +12,4 @@
   <% unless @results %>
     <%= render "suggestions", suggestions: @suggestions, workout: @workout, activity: @activity %>
   <% end %>
-</div>
+<% end %>

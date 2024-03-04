@@ -8,11 +8,11 @@
     <% end %>
   <% end %>
 
-  <div class="container mx-auto">
-    <%= render "workouts/carousel", workouts: @workouts, user: @user %>
+  <%= render "workouts/carousel", workouts: @workouts, user: @user %>
 
+  <%= render ContainerComponent.new do %>
     <%= link_to new_workout_path, class: "mb-5" do %>
       <%= render(ButtonComponent.new(type: :primary, full_width: true)) { "Add Personal Workout" } %>
     <% end %>
-  </div>
+  <% end %>
 </div>

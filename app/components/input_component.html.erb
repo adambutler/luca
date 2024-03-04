@@ -2,3 +2,11 @@
   <%= form.label field, class: label_classes %>
   <%= form.send(input_method, *args) %>
 </div>
+
+<% if datalist %>
+  <datalist id="<%= datalist_id %>">
+    <% datalist.each do |option| %>
+      <option value="<%= option %>">
+    <% end %>
+  </datalist>
+<% end %>

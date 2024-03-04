@@ -8,6 +8,7 @@ class InputComponent < ViewComponent::Base
   attribute :type, default: :text
   attribute :collection, default: []
   attribute :input_html_options, default: {}
+  attribute :datalist
   # attribute :placeholder, default: ""
   # attribute :required, default: false
   # attribute :error_classes, default: ""
@@ -21,7 +22,7 @@ class InputComponent < ViewComponent::Base
     case type
     when :textarea then :text_area
     when :select then :select
-    when :text then :text_field
+    when :text, :dataset then :text_field
     when :number then :number_field
     when :password then :password_field
     when :email then :email_field
@@ -50,9 +51,13 @@ class InputComponent < ViewComponent::Base
   end
 
   def options
-    {
+    opt = {
       class: input_classes
-    }.merge(input_html_options)
+    }
+    
+    opt[:list] = datalist_id if datalist
+
+    opt.merge(input_html_options)
   end
 
   def wrapper_classes
@@ -65,5 +70,9 @@ class InputComponent < ViewComponent::Base
 
   def input_classes
     "block w-full p-4 text-sm text-slate-300 border bg-opacity-50 border-[#282531] rounded-lg bg-slate-900 focus:ring-purple-800 focus:border-purple-800"
+  end
+
+  def datalist_id
+    @datalist_id ||= "datalist_#{SecureRandom.hex(4)}"
   end
 end

@@ -14,6 +14,7 @@ class WorkoutsController < ApplicationController
   # GET /workouts/new
   def new
     @workout = Workout.new
+    @workout.scheduled_at = Time.now.beginning_of_hour
   end
 
   # GET /workouts/1/edit
@@ -55,6 +56,6 @@ class WorkoutsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def workout_params
-      params.require(:workout).permit(:user_id, :scheduled_at)
+      params.require(:workout).permit(:user_id, :scheduled_at, :location)
     end
 end
