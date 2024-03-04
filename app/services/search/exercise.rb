@@ -41,6 +41,10 @@ module Search
         )
       )
     end
+
+    def self.delete!(exercise)
+      typesense_collection.documents[exercise.id.to_s].delete
+    end
     
     def self.search(user:, query:)
       search_parameters = {
