@@ -14,7 +14,7 @@
       <% end %>
       <div class="flex-grow text-center">
         <div class="inline-block">
-          <%= render DateTimeComponent.new(datetime: @workout.scheduled_at) %>
+          <%= render DateTimeComponent.for_workout(@workout) %>
         </div>
       </div>
       <% if next_workout_link(@workout) %>

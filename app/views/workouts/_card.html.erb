@@ -1,30 +1,17 @@
-<%= link_to workout_path(workout) do %>
-  <%= render CardComponent.new(css_classes: "w-72") do %>
-    <%= polaris_stack(vertical: true) do |stack| %>
-      <% stack.with_item do %>
-        <div class="flex">
-          <div class="flex-shink mr-2">
-            <%= render IconComponent.new(icon: :schedule, size: :xl, color: :slate) %>
-          </div>
-          <%= workout.scheduled_at.to_formatted_s(:short) %>
-        </div>
-      <% end %>
-      <% stack.with_item do %>
-        <div class="flex">
-          <div class="flex-shink mr-2">
-            <%= render IconComponent.new(icon: :location_on , size: :xl, color: :slate) %>
-          </div>
-          <%= "Gymset Clifton" %>
-        </div>
-      <% end %>
-      <% stack.with_item do %>
-        <div class="flex">
-          <div class="flex-shink mr-2">
-            <%= render IconComponent.new(icon: :face , size: :xl, color: :slate) %>
-          </div>
-          <%= "Luca" %>
-        </div>
-      <% end %>
-    <% end %>
+<%= link_to workout_path(workout), class: "flex flex-grow overflow-hidden relative" do %>
+  <%= render DateTimeComponent.for_workout(workout) do %>
+    <div class="w-4/5 lined bg-yellow-200 rounded mx-auto p-5 pt-3 text-black rotate-[-0.5deg] font-['Noteworthy'] relative translate-y-[calc(-100%+0.5em)] group-[.active]:translate-y-[-0.5em] group-hover:translate-x-[0.05em] transition">
+      <div class="text-lg font-bold mb-4">
+        <%= pluralize(workout.activities.count, "activity") %>
+      </div>
+      <ul class="pt-[1px]">
+        <% workout.activities.each do |activity| %>
+          <li class="text-xs line leading-5 pl-5 relative">
+            <span class="absolute left-0"><%= emoji_key_to_emoji(activity.emoji) %></span>
+            <%= activity.exercise.title %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
 <% end %>

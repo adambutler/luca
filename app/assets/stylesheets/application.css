@@ -89,3 +89,12 @@ body {
     mix-blend-mode: soft-light;
   }
 }
+
+.lined {
+  --line-color: rgb(233, 217, 146);
+  --bg-color: rgb(254 240 138);
+  background: repeating-linear-gradient(
+    var(--bg-color), var(--bg-color) 18px,
+    var(--line-color) 19px, var(--line-color) 20px
+  );
+}

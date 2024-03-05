@@ -1,129 +1,130 @@
+<% active = params[:activity] == activity.id.to_s %>
+
 <%= turbo_frame_tag activity, :card, class: "block mb-5 w-full relative", data: {test_id: "activity_card_frame"} do %>
-  <%= render CardComponent.new do %>
+  <%= render CardComponent.new(padded: false) do %>
     <%= render "activities/emoji_picker", activity: activity %>
     <%= render "activities/comments", activity: activity %>
     <%= render "activities/config", activity: activity %>
-    <%= polaris_stack(vertical: true) do |stack| %>
-      <% stack.with_item do %>
-        <div class="flex items-center gap-2">
-          <div class="text-2xl flex flex-col">
-            <%= link_to activiy_card_emoji_link(activity), data: {"turbo-action": "replace"}, class: "inline-block -ml-2 px-2 py-2 mr-2" do %>
-              <%= emoji_key_to_emoji(activity.emoji) %>
-            <% end %>
-            <%= link_to activiy_card_comment_link(activity), data: {"turbo-action": "replace"}, class: "inline-block -ml-2 px-2 py-2 mr-2 relative" do %>
-              💬
-              <% if activity.comments.any? %>
-                <span class="bg-red-500 text-white rounded-full p-1 inline-block text-[9px] w-4 h-4 leading-[8px] absolute top-[4px] right-[4px] text-center font-bold" >
-                  <%= activity.comments.count %>
-                </span>
-              <% end %>
-            <% end %>
-          </div>
-          <%= link_to activiy_card_collapsable_link(activity), data: {"turbo-action": "replace"}, class: "block mr-6" do %>
-            <div class="flex items-center mb-2">
-              <p class="font-bold"><%= activity.exercise.title %></p>
-            </div>
-            <p class="text-xs text-slate-400"><%= activity.exercise.description.truncate(params[:activity] == activity.id.to_s ? Float::INFINITY : 150) %></p>
-          <% end %>
-        </div>
-
-        <% if params[:activity] == activity.id.to_s %>
-          <div class="absolute top-0 right-0 flex p-5">
-            <%= link_to activiy_card_config_link(activity), data: {"turbo-action": "replace"}, class: "p-2" do %>
-              <%= render IconComponent.new(icon: :settings, size: :xl, color: :red) %>
-            <% end %>
-
-            <%= link_to activity_path(activity), data: {"turbo-method": :delete, "turbo-frame": "_top", "turbo-confirm": "Are you sure you want to delete this activity?"}, class: "p-2" do |form| %>
-              <%= render IconComponent.new(icon: :delete, size: :xl, color: :red) %>
-            <% end %>
-          </div>
-
-          <% if activity.sets.any? %>
-            <div class="grid grid-cols-12 gap-1 text-center mt-5 text-xs">
-              <div class=""></div>
-              <div class="col-span-5 font-black uppercase text-emerald-600">Load</div>
-              <div class="col-span-5 font-black uppercase text-sky-600">Rep</div>
-              <div class=""></div>
-              
-              <div class="pb-1 "></div>
-              <div class="pb-1 col-span-2 font-semibold uppercase text-emerald-600">Goal</div>
-              <div class="pb-1 "></div>
-              <div class="pb-1 col-span-2 font-semibold uppercase text-emerald-600">Actual</div>
-              <div class="pb-1 col-span-2 font-semibold uppercase text-sky-600">Goal</div>
-              <div class="pb-1 "></div>
-              <div class="pb-1 col-span-2 font-semibold uppercase text-sky-600">Actual</div>
-              <div class="pb-1 "></div>
-
-              <% activity.sets.each do |set| %>
-                <div class="flex justify-center items-center">
-                  <%= link_to toggle_warmup_set_path(set), data: {"turbo-method": "put"} do %>
-                    <% if set.warmup %>
-                      <%= render BadgeComponent.new(color: :yellow) do %>
-                        W
-                      <% end %>
-                    <% else %>
-                      <%= render BadgeComponent.new(color: :emerald) do %>
-                        <% set.set_label %>
-                      <% end %>
-                    <% end %>
-                  <% end %>
-                </div>
-                <div class="flex justify-center items-center col-span-2">
-                  <%= turbo_frame_tag(set, :load_goal_form) do %>
-                    <%= form_with(model: set, url: set_path(set)) do |form| %>
-                      <%= form.number_field :load_goal, id: dom_id(set, :load_goal), value: set.load_goal&.prettify, step: "0.1", inputmode: "decimal", class: "w-full p-2 text-slate-300 rounded bg-slate-900 bg-opacity-50 border-[#282531] ring-emerald-500 border font-semibold text-sm", onchange: "this.form.requestSubmit()", data: {test_id: "activity_card_set_load_goal_input"} %>
-                    <% end %>
-                  <% end %>
-                </div>
-                <div class="flex justify-center items-center">
-                  <%= link_to copy_load_from_goal_set_path(set), data: {"turbo-method": "put", test_id: "activity_card_set_copy_load"} do %>
-                    <%= render IconComponent.new(icon: :keyboard_tab, size: :"2xl", color: :slate) %>
-                  <% end %>
-                </div>
-                <div class="flex justify-center items-center col-span-2">
-                  <%= turbo_frame_tag(set, :load_actual_form) do %>
-                    <%= form_with(model: set, url: set_path(set)) do |form| %>
-                      <%= form.number_field :load_actual, id: dom_id(set, :load_actual), value: set.load_actual&.prettify, step: "0.1", inputmode: "decimal", class: "w-full p-2 text-slate-300 rounded bg-slate-900 bg-opacity-50 border-[#282531] ring-emerald-500 border font-semibold text-sm", onchange: "this.form.requestSubmit()", placeholder: set.placeholder(:load_actual), data: {test_id: "activity_card_set_load_actual_input"} %>
-                    <% end %>
-                  <% end %>
-                </div>
-                <div class="flex justify-center items-center col-span-2">
-                  <%= turbo_frame_tag(set, :repetitions_goal_form) do %>
-                    <%= form_with(model: set, url: set_path(set)) do |form| %>
-                      <%= form.text_field :repetitions_goal, id: dom_id(set, :repetitions_goal), value: repetitions_goal_value(set), class: "w-full p-2 text-slate-300 rounded bg-slate-900 bg-opacity-50 border-[#282531] ring-emerald-500 border font-semibold text-sm", onchange: "this.form.requestSubmit()" %>
-                    <% end %>
-                  <% end %>
-                </div>
-                <div class="flex justify-center items-center">
-                  <% if can_copy_repetitions_actual_copy_value?(set) %>
-                    <%= form_with(model: set, url: set_path(set), data: {"turbo-frame": dom_id(set, :repetitions_actual)}) do |form| %>
-                      <%= form.hidden_field :repetitions_actual, id: dom_id(set, :repetitions_goal_copy), value: repetitions_actual_copy_value(set) %>
-                      <button type="submit">
-                        <%= render IconComponent.new(icon: :keyboard_tab, size: :"2xl", color: :slate) %>
-                      </button>
-                    <% end %>
-                  <% end %>
-                </div>
-                <div class="flex justify-center items-center col-span-2">
-                  <%= turbo_frame_tag(set, :repetitions_actual_form) do %>
-                    <%= form_with(model: set, url: set_path(set)) do |form| %>
-                      <%= form.number_field :repetitions_actual, id: dom_id(set, :repetitions_actual), value: set.repetitions_actual, inputmode: "numeric", class: "w-full p-2 text-slate-300 rounded bg-slate-900 bg-opacity-50 border-[#282531] ring-emerald-500 border font-semibold text-sm", onchange: "this.form.requestSubmit()", placeholder: set.placeholder(:repetitions_actual), data: {test_id: "activity_card_set_repetitions_actual_input"} %>
-                    <% end %>
-                  <% end %>
-                </div>
-                <div class="flex justify-center items-center">
-                  <%= link_to set_path(set), data: {"turbo-method": :delete}, class: "p-2" do |form| %>
-                    <%= render IconComponent.new(icon: :delete, size: :xl, color: :red) %>
-                  <% end %>
-                </div>
-              <% end %>
-            </div>
-          <% end %>
-        
-          <%= form_with(model: activity.sets.build, url: activity_set_index_path(activity), class: "mt-5") do |form| %>
-            <%= render(ButtonComponent.new(type: :primary, full_width: true, submit: true)) { "Add Set" } %>
+    
+    <div class="flex gap-2">
+      <div class="text-2xl flex flex-col p-5 pr-0">
+        <%= link_to activiy_card_emoji_link(activity), data: {"turbo-action": "replace"}, class: "inline-block -ml-2 px-2 py-2 mr-2" do %>
+          <%= emoji_key_to_emoji(activity.emoji) %>
+        <% end %>
+        <%= link_to activiy_card_comment_link(activity), data: {"turbo-action": "replace"}, class: "inline-block -ml-2 px-2 py-2 mr-2 relative" do %>
+          💬
+          <% if activity.comments.any? %>
+            <span class="bg-red-500 text-white rounded-full p-1 inline-block text-[9px] w-4 h-4 leading-[8px] absolute top-[4px] right-[4px] text-center font-bold" >
+              <%= activity.comments.count %>
+            </span>
           <% end %>
         <% end %>
+      </div>
+      <%= link_to activiy_card_collapsable_link(activity), data: {"turbo-action": "replace"}, class: "flex items-center" do %>
+        <div class="py-5 <%= active ? "pr-24" : nil %>">
+          <div class="flex items-center mb-2">
+            <p class="font-bold"><%= activity.exercise.title %></p>
+          </div>
+          <p class="text-xs text-slate-400"><%= activity.exercise.description.truncate(params[:activity] == activity.id.to_s ? Float::INFINITY : 150) %></p>
+        </div>
+      <% end %>
+    </div>
+
+    <% if active %>
+      <div class="absolute top-0 right-0 flex p-5">
+        <%= link_to activiy_card_config_link(activity), data: {"turbo-action": "replace"}, class: "p-2" do %>
+          <%= render IconComponent.new(icon: :settings, size: :xl, color: :red) %>
+        <% end %>
+
+        <%= link_to activity_path(activity), data: {"turbo-method": :delete, "turbo-frame": "_top", "turbo-confirm": "Are you sure you want to delete this activity?"}, class: "p-2" do |form| %>
+          <%= render IconComponent.new(icon: :delete, size: :xl, color: :red) %>
+        <% end %>
+      </div>
+
+      <% if activity.sets.any? %>
+        <div class="grid grid-cols-12 gap-1 text-center mt-5 text-xs">
+          <div class=""></div>
+          <div class="col-span-5 font-black uppercase text-emerald-600">Load</div>
+          <div class="col-span-5 font-black uppercase text-sky-600">Rep</div>
+          <div class=""></div>
+          
+          <div class="pb-1 "></div>
+          <div class="pb-1 col-span-2 font-semibold uppercase text-emerald-600">Goal</div>
+          <div class="pb-1 "></div>
+          <div class="pb-1 col-span-2 font-semibold uppercase text-emerald-600">Actual</div>
+          <div class="pb-1 col-span-2 font-semibold uppercase text-sky-600">Goal</div>
+          <div class="pb-1 "></div>
+          <div class="pb-1 col-span-2 font-semibold uppercase text-sky-600">Actual</div>
+          <div class="pb-1 "></div>
+
+          <% activity.sets.each do |set| %>
+            <div class="flex justify-center items-center">
+              <%= link_to toggle_warmup_set_path(set), data: {"turbo-method": "put"} do %>
+                <% if set.warmup %>
+                  <%= render BadgeComponent.new(color: :yellow) do %>
+                    W
+                  <% end %>
+                <% else %>
+                  <%= render BadgeComponent.new(color: :emerald) do %>
+                    <% set.set_label %>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="flex justify-center items-center col-span-2">
+              <%= turbo_frame_tag(set, :load_goal_form) do %>
+                <%= form_with(model: set, url: set_path(set)) do |form| %>
+                  <%= form.number_field :load_goal, id: dom_id(set, :load_goal), value: set.load_goal&.prettify, step: "0.1", inputmode: "decimal", class: "w-full p-2 text-slate-300 rounded bg-slate-900 bg-opacity-50 border-[#282531] ring-emerald-500 border font-semibold text-sm", onchange: "this.form.requestSubmit()", data: {test_id: "activity_card_set_load_goal_input"} %>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="flex justify-center items-center">
+              <%= link_to copy_load_from_goal_set_path(set), data: {"turbo-method": "put", test_id: "activity_card_set_copy_load"} do %>
+                <%= render IconComponent.new(icon: :keyboard_tab, size: :"2xl", color: :slate) %>
+              <% end %>
+            </div>
+            <div class="flex justify-center items-center col-span-2">
+              <%= turbo_frame_tag(set, :load_actual_form) do %>
+                <%= form_with(model: set, url: set_path(set)) do |form| %>
+                  <%= form.number_field :load_actual, id: dom_id(set, :load_actual), value: set.load_actual&.prettify, step: "0.1", inputmode: "decimal", class: "w-full p-2 text-slate-300 rounded bg-slate-900 bg-opacity-50 border-[#282531] ring-emerald-500 border font-semibold text-sm", onchange: "this.form.requestSubmit()", placeholder: set.placeholder(:load_actual), data: {test_id: "activity_card_set_load_actual_input"} %>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="flex justify-center items-center col-span-2">
+              <%= turbo_frame_tag(set, :repetitions_goal_form) do %>
+                <%= form_with(model: set, url: set_path(set)) do |form| %>
+                  <%= form.text_field :repetitions_goal, id: dom_id(set, :repetitions_goal), value: repetitions_goal_value(set), class: "w-full p-2 text-slate-300 rounded bg-slate-900 bg-opacity-50 border-[#282531] ring-emerald-500 border font-semibold text-sm", onchange: "this.form.requestSubmit()" %>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="flex justify-center items-center">
+              <% if can_copy_repetitions_actual_copy_value?(set) %>
+                <%= form_with(model: set, url: set_path(set), data: {"turbo-frame": dom_id(set, :repetitions_actual)}) do |form| %>
+                  <%= form.hidden_field :repetitions_actual, id: dom_id(set, :repetitions_goal_copy), value: repetitions_actual_copy_value(set) %>
+                  <button type="submit">
+                    <%= render IconComponent.new(icon: :keyboard_tab, size: :"2xl", color: :slate) %>
+                  </button>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="flex justify-center items-center col-span-2">
+              <%= turbo_frame_tag(set, :repetitions_actual_form) do %>
+                <%= form_with(model: set, url: set_path(set)) do |form| %>
+                  <%= form.number_field :repetitions_actual, id: dom_id(set, :repetitions_actual), value: set.repetitions_actual, inputmode: "numeric", class: "w-full p-2 text-slate-300 rounded bg-slate-900 bg-opacity-50 border-[#282531] ring-emerald-500 border font-semibold text-sm", onchange: "this.form.requestSubmit()", placeholder: set.placeholder(:repetitions_actual), data: {test_id: "activity_card_set_repetitions_actual_input"} %>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="flex justify-center items-center">
+              <%= link_to set_path(set), data: {"turbo-method": :delete}, class: "p-2" do |form| %>
+                <%= render IconComponent.new(icon: :delete, size: :xl, color: :red) %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    
+      <%= form_with(model: activity.sets.build, url: activity_set_index_path(activity), class: "p-2 mt-3") do |form| %>
+        <%= render(ButtonComponent.new(type: :primary, full_width: true, submit: true)) { "Add Set" } %>
       <% end %>
     <% end %>
   <% end %>
