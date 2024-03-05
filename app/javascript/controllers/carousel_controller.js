@@ -1,14 +1,14 @@
 import { Controller } from "@hotwired/stimulus";
-import { useResize, useThrottle } from "stimulus-use";
+import { useResize, useDebounce } from "stimulus-use";
 
 export default class extends Controller {
-  static throttles = ["onScroll"];
+  static debounces = ["onScroll"];
   static targets = ["leftPadding", "rightPadding", "slide"];
   static values = { startingSlide: String };
 
   connect() {
     useResize(this);
-    useThrottle(this);
+    useDebounce(this, { wait: 60 });
 
     this.onScroll = this.onScroll.bind(this);
     this.element.addEventListener("scroll", this.onScroll);
