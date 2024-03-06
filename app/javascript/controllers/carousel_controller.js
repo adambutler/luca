@@ -19,7 +19,6 @@ export default class extends Controller {
   }
 
   onScroll() {
-    console.log("scrolling");
     const deltas = this.slideTargets.map((slide, index) => {
       const boundingClientRect = slide.getBoundingClientRect();
       const middle = boundingClientRect.left + boundingClientRect.width / 2;
