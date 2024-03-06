@@ -1,0 +1,42 @@
+<div class="flex gap-x-1 mb-2">
+  <div class="flex-[10] flex justify-center items-center">
+    <%= link_to toggle_warmup_set_path(set), data: {"turbo-method": "put"} do %>
+      <% if set.warmup %>
+        <%= render BadgeComponent.new(color: :yellow) do %>
+          W
+        <% end %>
+      <% else %>
+        <%= render BadgeComponent.new(color: :emerald) do %>
+          <% set.set_label %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="flex-[20] flex justify-center items-center">
+    <%= render "activity_sets/field", set: set, field: :load_goal %>
+  </div>
+  <div class="flex-[10] flex justify-center items-center">
+    <%= link_to copy_load_from_goal_set_path(set), data: {"turbo-frame": dom_id(set, "load_actual_form"), "turbo-method": "put", test_id: "activity_card_set_copy_load"} do %>
+      <%= render IconComponent.new(icon: :keyboard_tab, size: :"2xl", color: :slate) %>
+    <% end %>
+  </div>
+  <div class="flex-[20] flex justify-center items-center">
+    <%= render "activity_sets/field", set: set, field: :load_actual %>
+  </div>
+  <div class="flex-[20] flex justify-center items-center">
+    <%= render "activity_sets/field", set: set, field: :repetitions_goal %>
+  </div>
+  <div class="flex-[10] flex justify-center items-center">
+    <%= link_to copy_repetitions_from_goal_set_path(set), data: {"turbo-frame": dom_id(set, "repetitions_actual_form"), "turbo-method": "put", test_id: "activity_card_set_copy_load"} do %>
+      <%= render IconComponent.new(icon: :keyboard_tab, size: :"2xl", color: :slate) %>
+    <% end %>
+  </div>
+  <div class="flex-[20] flex justify-center items-center">
+    <%= render "activity_sets/field", set: set, field: :repetitions_actual %>
+  </div>
+  <div class="flex-[5] flex justify-center items-center">
+    <%= link_to set_path(set), data: {"turbo-method": :delete}, class: "px-1" do |form| %>
+      <%= render IconComponent.new(icon: :delete, size: :xl, color: :red) %>
+    <% end %>
+  </div>
+</div>

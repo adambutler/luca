@@ -1,0 +1,5 @@
+<%= turbo_frame_tag(set, "#{field}_form") do %>
+  <%= form_with(model: set, url: set_path(set)) do |form| %>
+    <%= form.send(activity_set_field_type_for_field(field: field), field, activity_set_field_options_for_field(set: set, field: field)) %>
+  <% end %>
+<% end %>

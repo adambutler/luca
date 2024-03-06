@@ -4,7 +4,7 @@ describe "workouts", type: :feature do
   include CapybaraHelper
 
   let(:user) { User.create(email: 'user@example.com', password: 'password') }
-  
+
   before :each do
     sign_in(user)
   end
@@ -50,18 +50,15 @@ describe "workouts", type: :feature do
 
         click_button "Add Set"
 
-        if find_set_field(activity_index: 1, set_index: 2, field: "repetitions_actual").value == ""
-          binding.pry
-        end
 
         expect(find_set_field(activity_index: 1, set_index: 2, field: "load_actual").value).to eq "25"
         expect(find_set_field(activity_index: 1, set_index: 2, field: "repetitions_actual").value).to eq "12"
-        
+
         click_button "Add Set"
 
         find_set_field(activity_index: 1, set_index: 3, field: "load_goal").fill_in(with: "31")
         blur
-        
+
         find_set_copy_link(activity_index: 1, set_index: 3, button: "load").click
         await_async
         expect(find_set_field(activity_index: 1, set_index: 3, field: "load_actual").value).to eq "31"

@@ -1,5 +1,9 @@
 class ActivitySetsController < ApplicationController
-  before_action :set_activity_set, only: %i[show edit update destroy toggle_warmup copy_load_from_goal]
+  include ActivitySetsHelper
+
+  layout false
+
+  before_action :set_activity_set, only: %i[show edit update destroy toggle_warmup copy_load_from_goal copy_repetitions_from_goal]
 
   # GET /activity_sets
   def index
@@ -24,7 +28,7 @@ class ActivitySetsController < ApplicationController
     @activity_set = ActivitySet.new
     @activity_set.activity_id = params[:activity_id]
     @activity_set.copy_values_from_previous_set
-    
+
     if @activity_set.save!
       redirect_to workout_path(@activity_set.activity.workout, activity: @activity_set.activity.id), notice: "Activity set was successfully created."
     else
@@ -34,8 +38,10 @@ class ActivitySetsController < ApplicationController
 
   # PATCH/PUT /activity_sets/1
   def update
+    @fields_to_rerender = activity_set_params.keys.map(&:to_sym)
+
     if @activity_set.update(activity_set_params)
-      redirect_to workout_path(@activity_set.activity.workout, activity: @activity_set.activity.id), notice: "Activity set was successfully updated.", status: :see_other
+      render :show, status: :ok
     else
       render :edit, status: :unprocessable_entity
     end
@@ -60,7 +66,16 @@ class ActivitySetsController < ApplicationController
 
   def copy_load_from_goal
     @activity_set.update(load_actual: @activity_set.load_goal)
-    redirect_to workout_path(@activity_set.activity.workout, activity: @activity_set.activity.id), notice: "Activity set was successfully updated.", status: :see_other
+
+    @fields_to_rerender = [:load_actual]
+    render "show", status: :ok
+  end
+
+  def copy_repetitions_from_goal
+    @activity_set.update(repetitions_actual: repetitions_actual_copy_value(@activity_set))
+
+    @fields_to_rerender = [:repetitions_actual]
+    render "show", status: :ok
   end
 
   private

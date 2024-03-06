@@ -2,10 +2,10 @@ class ActivitySet < ApplicationRecord
   belongs_to :activity, touch: true
 
   default_scope { order(:created_at) }
-  
+
   scope :warmup, -> { where(warmup: true) }
   scope :ordinary, -> { where(warmup: false) }
-  
+
   def set_number
     sibilings.where(warmup: false).where("id < ?", id).count
       .then { |set_number| split? ? set_number / 2 : set_number }
@@ -50,7 +50,7 @@ class ActivitySet < ApplicationRecord
     if activity.previous.has_warmup? && !activity.has_warmup?
       previous_set = activity.previous.sets[set_index + 1]
     end
-    
+
     return nil unless previous_set
 
     value = previous_set.send(attribute)

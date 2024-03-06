@@ -6,12 +6,11 @@ class CalendarComponent < ViewComponent::Base
   class << self
     include EmojiHelper
   end
-  
+
   attribute :date, default: -> { Date.today }
   attribute :annotations, default: -> { {} }
 
   def self.for_user_workouts(user:, date:)
-    bang if date.nil?
     new(date: date).tap do |c|
       c.annotations = Activity
         .joins(workout: :user)
@@ -32,7 +31,7 @@ class CalendarComponent < ViewComponent::Base
       date_component.with_emoji { emoji }
     end
   end
-  
+
   def today
     Date.today
   end
