@@ -15,7 +15,7 @@ export default class extends Controller {
   }
 
   disconnect() {
-    this.removeEventListener("scroll", this.onScroll);
+    this.element.removeEventListener("scroll", this.onScroll);
   }
 
   onScroll() {
