@@ -44,14 +44,14 @@ class Rangeable
   def parse_value_as_string
     case @raw_value
     when NUMERIC_REGEX
-      $LAST_MATCH_INFO[1].to_f.prettify
+      $~[1].to_f.prettify
     when RANGE_REGEX
-      from = $LAST_MATCH_INFO[1].to_i
-      range_operator = $LAST_MATCH_INFO[2]
-      to = range_operator === "..." ? $LAST_MATCH_INFO[3].to_i - 1 : $LAST_MATCH_INFO[3].to_i
+      from = $~[1].to_i
+      range_operator = $~[2]
+      to = range_operator === "..." ? $~[3].to_i - 1 : $~[3].to_i
       from..to
     when LIMIT_REGEX
-      int = $LAST_MATCH_INFO[1]
+      int = $~[1]
       "@#{int}"
     else
       raise ArgumentError, "Invalid value: #{@raw_value.inspect}"
