@@ -22,11 +22,12 @@
     <main class="mx-auto">
       <%= render "layouts/logo" %>
       <%= render "layouts/toast" %>
+      <%= render "layouts/return_to_client" %>
 
       <% if content_for?(:heading) %>
         <%= yield :heading %>
       <% end %>
-      
+
       <% if content_for?(:heading_text) %>
         <%= render ContainerComponent.new do %>
           <%= polaris_text(variant: :heading4xl, as: :h1) do %>
@@ -34,7 +35,7 @@
           <% end %>
         <% end %>
       <% end %>
-      
+
       <%= yield %>
     </main>
   </body>

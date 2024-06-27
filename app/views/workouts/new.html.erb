@@ -1,4 +1,10 @@
 <%= render ContainerComponent.new do %>
-  <%= render(HeadingComponent.h2) { "New Workout" } %>
+  <%= render(HeadingComponent.h2) do %>
+    <% if @workout.user == current_user %>
+      New personal workout
+    <% else %>
+      New workout for <%= @workout.user.full_name %>
+    <% end %>
+  <% end %>
   <%= render "form", workout: @workout %>
 <% end %>

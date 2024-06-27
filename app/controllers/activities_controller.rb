@@ -1,6 +1,6 @@
 class ActivitiesController < ApplicationController
   include ActionView::RecordIdentifier
-  
+
   before_action :set_workout, only: %i[new create]
   before_action :set_activity, only: %i[ show edit update destroy ]
 
@@ -23,6 +23,10 @@ class ActivitiesController < ApplicationController
     else
       @suggestions = Exercise.suggested_exercises(workout: @workout)
     end
+
+    if @workout.user != current_user
+      @current_client = @workout.user
+    end
   end
 
   # GET /activities/1/edit
@@ -34,7 +38,7 @@ class ActivitiesController < ApplicationController
     @activity = ActivityBuilder.new(
       workout: @workout, exercise: Exercise.find(activity_params[:exercise_id])
     ).build!
-    
+
     redirect_to workout_path(@workout, activity: @activity), notice: "Activity was successfully created."
   end
 

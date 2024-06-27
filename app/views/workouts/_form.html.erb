@@ -12,7 +12,7 @@
   <% end %>
 
   <% if params[:user] %>
-    <%= form.text_field :user_id, value: params[:user] %>
+    <%= form.hidden_field :user_id %>
   <% end %>
 
   <%= render InputComponent.new(form: form, field: :scheduled_at, type: :datetime) %>

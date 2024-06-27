@@ -9,12 +9,15 @@ class WorkoutsController < ApplicationController
   # GET /workouts/1
   def show
     session[:last_visited_workout] = @workout.id
+    set_current_client
   end
 
   # GET /workouts/new
   def new
     @workout = Workout.new
+    @workout.user = params[:user] ? User.find(params[:user]) : current_user
     @workout.scheduled_at = Time.now.beginning_of_hour
+    set_current_client
   end
 
   # GET /workouts/1/edit
@@ -57,5 +60,11 @@ class WorkoutsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def workout_params
       params.require(:workout).permit(:user_id, :scheduled_at, :location)
+    end
+
+    def set_current_client
+      if @workout.user != current_user
+        @current_client = @workout.user
+      end
     end
 end
